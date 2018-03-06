@@ -1,3 +1,5 @@
+Check out the sample resume at [https://thomasoniii.github.io/react-resume/](https://thomasoniii.github.io/react-resume/).
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 We're going to assume you know a bit about react and create-react-app. Documentation is still pretty light, since it's a brand new project. A lot of it is straight out of create-react-app.
