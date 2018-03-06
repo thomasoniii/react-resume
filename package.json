@@ -1,6 +1,6 @@
 {
   "name": "react-resume",
-  "homepage" : "http://thomasoniii.github.io/react-resume",
+  "homepage" : "https://thomasoniii.github.io/react-resume",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
