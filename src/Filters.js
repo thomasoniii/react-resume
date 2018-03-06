@@ -17,6 +17,21 @@ class Filters extends PureComponent {
         </div>
         <div className='row'>
           <div className='col filter-section'>
+            { this.props.section_order.map( filter => {
+              return (
+                <button
+                  className={`btn btn-sm filter-btn ${this.props.section_filters[filter] ? 'btn-primary' : 'btn-secondary'}`}
+                  key={filter}
+                  onClick={() => this.props.toggleFilter(filter)}
+                  >
+                    { filter }
+                </button>
+              )
+            })}
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col filter-section'>
             { this.props.order.map( filter => {
               return (
                 <button
@@ -41,7 +56,7 @@ class Filters extends PureComponent {
 }
 
 const mapStateToProps = ({filters}) => {
-  return {order : filters.order, filters : filters.filters};
+  return filters;
 }
 
 export default connect(mapStateToProps, {toggleFilter})(Filters);

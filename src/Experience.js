@@ -3,7 +3,35 @@ import React from 'react';
 import {PROJECT_BLURBS} from './filter_types';
 import './styles/Experience.css';
 
-export default ({experience, filters, projects}) => {
+const renderHighlight = (highlight, filters) => {
+console.log(filters, highlight.tech, highlight.blurb);
+  if (Object.keys(filters).length && highlight.tech) {
+    console.log("DISPLAY TECH : ", highlight.tech, filters);
+    let shouldDisplay = highlight.tech.reduce( (sd, f) => {return sd || filters[f]}, false);
+    if (!shouldDisplay) { return null };
+  }
+
+  return (
+    <li key={highlight.blurb}>
+      { highlight.blurb }
+      { renderTech(highlight.tech, filters) }
+    </li>
+  )
+}
+
+const renderTech = (tech = [], filters) => {
+  if (! tech.length) { return null }
+
+  return (
+    <div className='project-tech-box'>
+      <span className='subsubheading'>Technology used:</span>
+      <span className='project-tech'>{tech.join(', ')}</span>
+    </div>
+  )
+}
+
+export default ({experience, filters : all_filters, sections, projects}) => {
+  let filters = Object.keys(all_filters).reduce( (acc, f) => { if (all_filters[f]) { acc[f] = true }; return acc }, {});
   console.log("BLURBS : ", filters, PROJECT_BLURBS, filters[PROJECT_BLURBS]);
   return (
     <div className='container-fluid section experience'>
@@ -52,7 +80,7 @@ export default ({experience, filters, projects}) => {
                   </div>
                 </div>
               </div>,
-              projects[project_name] && filters[PROJECT_BLURBS] && <div className='row' key={`${project_name}-blurb`}>
+              projects[project_name] && sections[PROJECT_BLURBS] && <div className='row' key={`${project_name}-blurb`}>
                 <div className='col-md project-blurb order-md-first'>
                   { projects[project_name].blurb }
                 </div>
@@ -71,11 +99,7 @@ export default ({experience, filters, projects}) => {
                   <div className='col highlight'>
                     <ul>
                       {project.highlights.map(highlight => {
-                        return (
-                          <li key={highlight.blurb}>
-                            { highlight.blurb }
-                            { highlight.tech && (<div className='project-tech-box'><span className='subsubheading'>Technology used:</span> <span className='project-tech'>{highlight.tech.join(', ')}</span></div>)}</li>
-                        )
+                        return renderHighlight(highlight, filters)
                       })}
                     </ul>
                   </div>

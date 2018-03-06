@@ -31,6 +31,7 @@ class App extends Component {
 
   render() {
     const filters = this.props.filters;
+    const sections = this.props.sections;
     return (
       [
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark" key='nav'>
@@ -52,7 +53,7 @@ class App extends Component {
             </ul>
           </div>
         </nav>,
-        <div className='container-fluid print-header'>
+        <div className='container-fluid print-header' key='print-header'>
           <div className='row'>
             <div className='col print-name'>{resume.contact.name}</div>
             <div className='col print-phone'>{resume.contact.phone}</div>
@@ -60,18 +61,18 @@ class App extends Component {
           </div>
         </div>,
         <Filters key='filters'/>,
-        filters[SUMMARY]        && <Summary    filters={ filters } summary={resume.summary}       key='summary'/>,
-        filters[SKILLS]         && <Skills     filters={ filters } skills={resume.skills}         key='skills'/>,
-        filters[EXPERIENCE]     && <Experience filters={ filters } experience={resume.experience} projects={resume.projects} key='experience'/>,
-        filters[OTHER_PROJECTS] && <Projects   filters={ filters } projects={resume.other}        key='projects'/>,
-        filters[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>
+        sections[SUMMARY]        && <Summary    filters={ filters } summary={resume.summary}       key='summary'/>,
+        sections[SKILLS]         && <Skills     filters={ filters } skills={resume.skills}         key='skills'/>,
+        sections[EXPERIENCE]     && <Experience filters={ filters } experience={resume.experience} projects={resume.projects} sections={sections} key='experience'/>,
+        sections[OTHER_PROJECTS] && <Projects   filters={ filters } projects={resume.other}        key='projects'/>,
+        sections[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>
       ]
     );
   }
 }
 
 const mapStateToProps = ({filters}) => {
-  return { filters : filters.filters };
+  return { sections : filters.section_filters, filters : filters.filters };
 }
 
 export default connect(mapStateToProps,{setFilters, addFilters})(App);
