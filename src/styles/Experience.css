@@ -20,6 +20,9 @@
   font-weight : bold;
 }
 
+.job-project-name::after {
+  content : ' - '
+}
 
 .project-role {
   text-decoration : underline;

@@ -63,7 +63,7 @@ export default ({experience, filters : all_filters, sections, projects, collapse
             return [
               <div className='row job-project' key={`${project_name}-info`} onClick={() => {collapseCallback(project_name)}}>
                 <div className='col-md'>
-                  <span className='project-name'>{project_name}</span>
+                  <span className='job-project-name'>{project_name}</span>
                   <span className='project-role'>{project.role}</span>
                   <span className='project-members'>{project.members} person team</span>
                   {project.url && (

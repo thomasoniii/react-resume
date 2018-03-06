@@ -49,9 +49,6 @@ export default (props) => {
         <div className='col-sm'>
           { renderSkillSet(additional, filters) }
         </div>
-        <div className='col-sm'>
-          Pie chart!
-        </div>
       </div>
     </div>
   )
