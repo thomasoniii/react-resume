@@ -12,11 +12,11 @@ export default ({ schools }) => {
         return (
           [
             <div className='row' key='name'>
-              <div className='col school'>
+              <div className='col-sm school'>
                 <span className='school'>{ school.school }</span>,
                 <span className='location'> { school.location}</span>
               </div>
-              <div className='col'>
+              <div className='col-sm'>
                 <div className='float-right date'>
                   { school.date }
                 </div>

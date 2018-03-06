@@ -1,0 +1,22 @@
+.filter-btn {
+  margin-left : 5px;
+  margin-right : 5px;
+  margin-top : 1px;
+  margin-bottom : 1px;
+}
+
+.filter-section {
+  text-align : center;
+  padding : 1px;
+}
+
+.filter-container {
+  margin-bottom : 10px;
+  background-color : lightgray;
+}
+
+@media print {
+  .filter-container {
+    display : none;
+  }
+}

@@ -50,3 +50,11 @@
 .subsubheading {
   text-decoration : underline;
 }
+
+.job-company:hover {
+  background-color : lightgray;
+}
+
+.job-project:hover {
+  background-color : lightgray;
+}

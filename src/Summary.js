@@ -8,7 +8,7 @@ export default ({summary}) => {
       </div>
       <div className='row'>
         <div className='col'>
-          {summary}
+          {summary.map(p => <p>{p}</p>)}
         </div>
       </div>
     </div>

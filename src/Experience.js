@@ -1,10 +1,12 @@
 import React from 'react';
 
+import {PROJECT_BLURBS} from './filter_types';
 import './styles/Experience.css';
 
-export default ({experience, projects}) => {
+export default ({experience, filters, projects}) => {
+  console.log("BLURBS : ", filters, PROJECT_BLURBS, filters[PROJECT_BLURBS]);
   return (
-    <div className='container-fluid section projects'>
+    <div className='container-fluid section experience'>
       <div className='row'>
         <div className='col section-header'>
           Experience
@@ -12,7 +14,7 @@ export default ({experience, projects}) => {
       </div>
       { experience.map( job => {
         return [
-          <div className='row' key='name'>
+          <div className='row job-company' key='name'>
             <div className='col-sm'>
               <span className='employer'>{job.employer}</span>
               <span className='location'>, {job.location}</span>
@@ -30,7 +32,7 @@ export default ({experience, projects}) => {
               </div>
             )
           }),
-          job.projects && job.projects.map( project => {
+          job.projects && !job.collapsed && job.projects.map( project => {
             const project_name = project.project;
             return [
               <div className='row job-project' key={`${project_name}-info`}>
@@ -50,7 +52,7 @@ export default ({experience, projects}) => {
                   </div>
                 </div>
               </div>,
-              projects[project_name] && <div className='row' key={`${project_name}-blurb`}>
+              projects[project_name] && filters[PROJECT_BLURBS] && <div className='row' key={`${project_name}-blurb`}>
                 <div className='col-md project-blurb order-md-first'>
                   { projects[project_name].blurb }
                 </div>
@@ -64,7 +66,7 @@ export default ({experience, projects}) => {
                   </div>
                 )}
               </div>,
-              project.highlights && (
+              project.highlights && !project.collapsed && (
                 <div className='row project-highlight' key={`${project_name}-highlights`}>
                   <div className='col highlight'>
                     <ul>
