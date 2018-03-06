@@ -20,9 +20,6 @@
   font-weight : bold;
 }
 
-.project-name::after {
-  content : ' - '
-}
 
 .project-role {
   text-decoration : underline;

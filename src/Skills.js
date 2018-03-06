@@ -12,7 +12,6 @@ const renderSkillSet = (set, filters) => {
             { cat.items.map(skill => {
               if (Object.keys(filters).length && skill.filters !== undefined) {
                 let shouldDisplay = skill.filters.reduce( (sd, f) => {return sd || filters[f]}, false);
-                console.log("SHOULD DISPLAY : ", skill, skill.filters, shouldDisplay);
                 if (!shouldDisplay) { return null };
               }
               return (
@@ -37,7 +36,7 @@ export default (props) => {
   let professional = props.skills['Professional Skills'];
   let additional   = props.skills['Additional Skills'];
   let filters      = Object.keys(props.filters).reduce( (acc, f) => { if (props.filters[f]) { acc[f] = true }; return acc }, {});
-console.log("SKILL FILTER : ", filters, props.filters);
+
   return (
     <div className='container-fluid section skills'>
       <div className='row'>
@@ -49,6 +48,9 @@ console.log("SKILL FILTER : ", filters, props.filters);
         </div>
         <div className='col-sm'>
           { renderSkillSet(additional, filters) }
+        </div>
+        <div className='col-sm'>
+          Pie chart!
         </div>
       </div>
     </div>

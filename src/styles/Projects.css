@@ -10,3 +10,7 @@
 .project {
   font-weight : bold;
 }
+
+.project-name:hover {
+  background-color : lightgray;
+}

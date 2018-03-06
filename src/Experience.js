@@ -4,9 +4,7 @@ import {PROJECT_BLURBS} from './filter_types';
 import './styles/Experience.css';
 
 const renderHighlight = (highlight, filters) => {
-console.log(filters, highlight.tech, highlight.blurb);
   if (Object.keys(filters).length && highlight.tech) {
-    console.log("DISPLAY TECH : ", highlight.tech, filters);
     let shouldDisplay = highlight.tech.reduce( (sd, f) => {return sd || filters[f]}, false);
     if (!shouldDisplay) { return null };
   }
@@ -30,9 +28,9 @@ const renderTech = (tech = [], filters) => {
   )
 }
 
-export default ({experience, filters : all_filters, sections, projects}) => {
+export default ({experience, filters : all_filters, sections, projects, collapsed, collapseCallback}) => {
   let filters = Object.keys(all_filters).reduce( (acc, f) => { if (all_filters[f]) { acc[f] = true }; return acc }, {});
-  console.log("BLURBS : ", filters, PROJECT_BLURBS, filters[PROJECT_BLURBS]);
+
   return (
     <div className='container-fluid section experience'>
       <div className='row'>
@@ -42,7 +40,7 @@ export default ({experience, filters : all_filters, sections, projects}) => {
       </div>
       { experience.map( job => {
         return [
-          <div className='row job-company' key='name'>
+          <div className='row job-company' key='name' onClick={() => {collapseCallback(job.id)}}>
             <div className='col-sm'>
               <span className='employer'>{job.employer}</span>
               <span className='location'>, {job.location}</span>
@@ -60,10 +58,10 @@ export default ({experience, filters : all_filters, sections, projects}) => {
               </div>
             )
           }),
-          job.projects && !job.collapsed && job.projects.map( project => {
+          job.projects && !collapsed[job.id] && job.projects.map( project => {
             const project_name = project.project;
             return [
-              <div className='row job-project' key={`${project_name}-info`}>
+              <div className='row job-project' key={`${project_name}-info`} onClick={() => {collapseCallback(project_name)}}>
                 <div className='col-md'>
                   <span className='project-name'>{project_name}</span>
                   <span className='project-role'>{project.role}</span>
@@ -94,7 +92,7 @@ export default ({experience, filters : all_filters, sections, projects}) => {
                   </div>
                 )}
               </div>,
-              project.highlights && !project.collapsed && (
+              project.highlights && !collapsed[project.project] && (
                 <div className='row project-highlight' key={`${project_name}-highlights`}>
                   <div className='col highlight'>
                     <ul>
