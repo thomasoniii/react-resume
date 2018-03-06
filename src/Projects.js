@@ -4,7 +4,6 @@ import './styles/Projects.css';
 
 export default ( ({projects, filters : all_filters, collapsed, collapseCallback }) => {
   let filters = Object.keys(all_filters).reduce( (acc, f) => { if (all_filters[f]) { acc[f] = true }; return acc }, {});
-  console.log("PROJECTS COLLAPSED : ", collapsed);
   return (
     <div className='container-fluid section projects'>
       <div className='row'>
@@ -14,12 +13,11 @@ export default ( ({projects, filters : all_filters, collapsed, collapseCallback 
       </div>
       { projects.map( project => {
         if (Object.keys(filters).length && project.tech) {
-          console.log("DISPLAY TECH : ", project.tech, filters);
           let shouldDisplay = project.tech.reduce( (sd, f) => {return sd || filters[f]}, false);
           if (!shouldDisplay) { return null };
         }
         return [
-          <div className='row project-name' key={project.name} onClick={() => {collapseCallback(project.name)}}>
+          <div className='row project-name' key={project.name} onClick={() => {collapseCallback(project.id)}}>
             <div className='col-md project'>
               {project.name}
             </div>

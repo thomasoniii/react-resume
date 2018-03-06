@@ -13,12 +13,10 @@ const INITIAL = {
 
 INITIAL.section_filters[types.PROJECT_BLURBS] = false;
 
-console.log("INITIAL : ", INITIAL);
 export default (state = INITIAL, action) => {
 
   switch (action.type) {
     case SET_FILTERS : {
-      console.log("FILTERS : ", action.payload);
       return {
         ...INITIAL,
         order   : action.payload,
@@ -60,7 +58,6 @@ export default (state = INITIAL, action) => {
       else if (newState.filters[action.payload] !== undefined) {
         newState.filters = {...newState.filters, [action.payload] : !newState.filters[action.payload]}
       }
-      console.log("TOGGLES TO : ", newState);
       return newState;
     }
     default : {
