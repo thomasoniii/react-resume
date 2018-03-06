@@ -1,0 +1,31 @@
+.skills ul {
+  list-style : none;
+}
+
+.skill-type {
+  font-weight : bold;
+}
+
+.skill-duration {
+  font-style : italic;
+}
+
+.skill-level {
+  font-style : italic;
+}
+
+.skill-level::before {
+  content : " ("
+}
+
+.skill-level::after {
+  content : ")"
+}
+
+.skill-cat-list {
+  padding-left : 1vh;
+}
+
+.skill-list {
+  padding-left : 1vh;
+}

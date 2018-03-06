@@ -1,0 +1,18 @@
+.section {
+  border-top : 1px solid black;
+  margin-bottom : 2vh;
+  padding-top : 1vh;
+}
+
+.section-header {
+  font-weight : bold;
+  font-size : 3vh;
+}
+
+.date {
+  font-style : italic;
+}
+
+.col {
+  border : 1px solid red;
+}
