@@ -29,3 +29,7 @@
 .skill-list {
   padding-left : 1vh;
 }
+
+.oneline {
+  white-space: nowrap;
+}

@@ -1,3 +1,7 @@
+.education {
+  page-break-after: always;
+}
+
 .education, .education ul {
   list-style-type : none
 }

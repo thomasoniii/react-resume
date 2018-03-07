@@ -75,6 +75,7 @@ class App extends Component {
         <Filters key='filters'/>,
         sections[SUMMARY]        && <Summary    filters={ filters } summary={resume.summary}       key='summary'/>,
         sections[SKILLS]         && <Skills     filters={ filters } skills={resume.skills}         key='skills'/>,
+        sections[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>,
         sections[EXPERIENCE]     &&
           <Experience
             filters={ filters }
@@ -90,8 +91,7 @@ class App extends Component {
             projects={resume.other}
             collapsed={collapsed}
             collapseCallback={this.props.toggleCollapsed}
-            key='projects'/>,
-        sections[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>
+            key='projects'/>
       ]
     );
   }
