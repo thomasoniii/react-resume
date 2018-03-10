@@ -21,18 +21,20 @@ const collapsed = {};
 const collapsedCallback = () => {};
 const sections = {};
 
-test('Experience exists properly', () => {
-  const experience = renderer.create(
-    <Experience
-      filters={ filters }
-      experience={resume.experience}
-      projects={resume.projects}
-      sections={sections}
-      collapsed={collapsed}
-      collapseCallback={collapsedCallback}
-      />
-  );
+describe('Experience tests', () => {
+  test('Experience exists properly', () => {
+    const experience = renderer.create(
+      <Experience
+        filters={ filters }
+        experience={resume.experience}
+        projects={resume.projects}
+        sections={sections}
+        collapsed={collapsed}
+        collapseCallback={collapsedCallback}
+        />
+    );
 
-  let tree = experience.toJSON();
-  expect(tree).toMatchSnapshot();
+    let tree = experience.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

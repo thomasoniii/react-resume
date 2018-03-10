@@ -18,16 +18,18 @@ const filters = {};
 const collapsed = {};
 const collapsedCallback = () => {};
 
-test('Projects exists properly', () => {
-  const projects = renderer.create(
-    <Projects
-      filters={filters}
-      projects={resume.other}
-      collapsed={collapsed}
-      collapsedCallback={collapsedCallback}
-    />
-  );
+describe('Other Projects tests', () => {
+  test('Projects exists properly', () => {
+    const projects = renderer.create(
+      <Projects
+        filters={filters}
+        projects={resume.other}
+        collapsed={collapsed}
+        collapsedCallback={collapsedCallback}
+      />
+    );
 
-  let tree = projects.toJSON();
-  expect(tree).toMatchSnapshot();
+    let tree = projects.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

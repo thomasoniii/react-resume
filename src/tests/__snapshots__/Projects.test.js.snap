@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Projects exists properly 1`] = `
+exports[`Other Projects tests Projects exists properly 1`] = `
 <div
   className="container-fluid section projects"
 >

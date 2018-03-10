@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Summary exists properly 1`] = `
+exports[`Education tests Summary exists properly 1`] = `
 <div
   className="container-fluid section"
 >

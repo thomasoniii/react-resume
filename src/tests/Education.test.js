@@ -10,14 +10,16 @@ import resume from '../data/resume-example.json';
 
 const filters = {};
 
-test('Education exists properly', () => {
-  const education = renderer.create(
-    <Education
-      filters={filters}
-      schools={resume.education}
-    />
-  );
+describe('Education tests', () => {
+  test('Education exists properly', () => {
+    const education = renderer.create(
+      <Education
+        filters={filters}
+        schools={resume.education}
+      />
+    );
 
-  let tree = education.toJSON();
-  expect(tree).toMatchSnapshot();
+    let tree = education.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

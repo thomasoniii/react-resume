@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Experience exists properly 1`] = `
+exports[`Experience tests Experience exists properly 1`] = `
 <div
   className="container-fluid section experience"
 >

@@ -10,15 +10,17 @@ import resume from '../data/resume-example.json';
 
 const filters = {};
 
-test('Summary exists properly', () => {
+describe('Education tests', () => {
+  test('Summary exists properly', () => {
 
-  const summary = renderer.create(
-    <Summary
-      filters={filters}
-      summary={resume.summary}
-    />
-  );
+    const summary = renderer.create(
+      <Summary
+        filters={filters}
+        summary={resume.summary}
+      />
+    );
 
-  let tree = summary.toJSON();
-  expect(tree).toMatchSnapshot();
+    let tree = summary.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
