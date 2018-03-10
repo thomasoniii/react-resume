@@ -20,6 +20,10 @@
   font-weight : bold;
 }
 
+.job-project-name {
+  font-style : italic;
+}
+
 .job-project-name::after {
   content : ' - '
 }

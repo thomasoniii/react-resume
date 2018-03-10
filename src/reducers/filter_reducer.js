@@ -18,14 +18,14 @@ export default (state = INITIAL, action) => {
   switch (action.type) {
     case SET_FILTERS : {
       return {
-        ...INITIAL,
+        ...state,
         order   : action.payload,
         filters : action.payload.reduce( (acc, filter) => { acc[filter] = false; return acc }, {})
       };
     }
     case ADD_FILTERS : {
       return {
-        ...INITIAL,
+        ...state,
         order   : state.order,
         filters : {...state.filters, ...action.payload.reduce( (acc, filter) => { acc[filter] = true; return acc }, {})}
       };

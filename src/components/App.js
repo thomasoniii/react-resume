@@ -23,23 +23,27 @@ class App extends Component {
 
   componentWillMount() {
 
-    if (resume.filters)        { this.props.setFilters(resume.filters) };
-    if (resume.active_filters) { this.props.addFilters(resume.active_filters) };
+    if (!Object.keys(this.props.filters).length) {
+      if (resume.filters)        { this.props.setFilters(resume.filters) };
+      if (resume.active_filters && !Object.keys(this.props.filters).length) { this.props.addFilters(resume.active_filters) };
+    }
 
-    let collapsed = {};
-    resume.experience.forEach( job => {
-      collapsed[job.id] = job.collapsed || false;
-      if (job.projects) {
-        job.projects.forEach(project => {
-          collapsed[project.project] = project.collapsed;
-        })
-      }
-    });
-    resume.other.forEach( project => {
-      collapsed[project.id] = project.collapsed || false;
-    })
+    if (!Object.keys(this.props.collapsed).length) {
+      let collapsed = {};
+      resume.experience.forEach( job => {
+        collapsed[job.id] = job.collapsed || false;
+        if (job.projects) {
+          job.projects.forEach(project => {
+            collapsed[project.project] = project.collapsed;
+          })
+        }
+      });
+      resume.other.forEach( project => {
+        collapsed[project.id] = project.collapsed || false;
+      })
 
-    this.props.setCollapsed(collapsed);
+      this.props.setCollapsed(collapsed);
+    }
 
   }
 
@@ -98,6 +102,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({filters, collapsed}) => {
+  console.log("IN WITH FILTERS: ", filters);
   return {
     sections  : filters.section_filters,
     filters   : filters.filters,
