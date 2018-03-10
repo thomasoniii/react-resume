@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles/Projects.css';
+import '../styles/Projects.css';
 
 export default ( ({projects, filters : all_filters, collapsed, collapseCallback }) => {
   let filters = Object.keys(all_filters).reduce( (acc, f) => { if (all_filters[f]) { acc[f] = true }; return acc }, {});

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles/Skills.css';
+import '../styles/Skills.css';
 
 const renderSkillSet = (set, filters) => {
   return set.map(cat => {

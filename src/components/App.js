@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-import { setFilters, addFilters, setCollapsed, toggleCollapsed } from './actions';
+import { setFilters, addFilters, setCollapsed, toggleCollapsed } from '../actions';
 
 import Projects from './Projects';
 import Education from './Education';
@@ -13,11 +13,11 @@ import Summary from './Summary';
 import Skills from './Skills';
 import Filters from './Filters';
 
-import {EDUCATION, EXPERIENCE, OTHER_PROJECTS, SKILLS, SUMMARY} from './filter_types';
+import {EDUCATION, EXPERIENCE, OTHER_PROJECTS, SKILLS, SUMMARY} from '../filter_types';
 
-import resume from './data/resume.json';
+import resume from '../data/resume.json';
 
-import './styles/App.css';
+import '../styles/App.css';
 
 class App extends Component {
 
@@ -44,8 +44,8 @@ class App extends Component {
   }
 
   render() {
-    const filters = this.props.filters;
-    const sections = this.props.sections;
+    const filters   = this.props.filters;
+    const sections  = this.props.sections;
     const collapsed = this.props.collapsed;
     return (
       [
@@ -75,7 +75,6 @@ class App extends Component {
         <Filters key='filters'/>,
         sections[SUMMARY]        && <Summary    filters={ filters } summary={resume.summary}       key='summary'/>,
         sections[SKILLS]         && <Skills     filters={ filters } skills={resume.skills}         key='skills'/>,
-        sections[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>,
         sections[EXPERIENCE]     &&
           <Experience
             filters={ filters }
@@ -91,7 +90,8 @@ class App extends Component {
             projects={resume.other}
             collapsed={collapsed}
             collapseCallback={this.props.toggleCollapsed}
-            key='projects'/>
+            key='projects'/>,
+            sections[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>
       ]
     );
   }
@@ -99,8 +99,8 @@ class App extends Component {
 
 const mapStateToProps = ({filters, collapsed}) => {
   return {
-    sections : filters.section_filters,
-    filters : filters.filters,
+    sections  : filters.section_filters,
+    filters   : filters.filters,
     collapsed
   };
 }

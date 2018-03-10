@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {PROJECT_BLURBS} from './filter_types';
-import './styles/Experience.css';
+import {PROJECT_BLURBS} from '../filter_types';
+import '../styles/Experience.css';
 
 const renderHighlight = (highlight, filters) => {
   if (Object.keys(filters).length && highlight.tech) {

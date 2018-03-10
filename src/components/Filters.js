@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import {toggleFilter, expandAll, collapseAll} from './actions';
+import {toggleFilter, expandAll, collapseAll} from '../actions';
 
-import './styles/Filters.css';
+import '../styles/Filters.css';
 
 class Filters extends PureComponent {
   render() {
