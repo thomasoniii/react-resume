@@ -48,9 +48,33 @@ class App extends Component {
   }
 
   render() {
-    const filters   = this.props.filters;
-    const sections  = this.props.sections;
-    const collapsed = this.props.collapsed;
+
+    const { filters, collapsed, section_filters, section_order } = this.props;
+
+    const section_mapping = {
+      [EDUCATION]       : section_filters[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>,
+      [EXPERIENCE]      : section_filters[EXPERIENCE]     &&
+                          <Experience
+                            filters={ filters }
+                            experience={resume.experience}
+                            projects={resume.projects}
+                            sections={section_filters}
+                            collapsed={collapsed}
+                            collapseCallback={this.props.toggleCollapsed}
+                            key='experience'/>,
+      [OTHER_PROJECTS]  : section_filters[OTHER_PROJECTS] &&
+                          <Projects
+                            filters={ filters }
+                            projects={resume.other}
+                            collapsed={collapsed}
+                            collapseCallback={this.props.toggleCollapsed}
+                            key='projects'/>,
+      [SKILLS]          : section_filters[SKILLS]         && <Skills     filters={ filters } skills={resume.skills}         key='skills'/>,
+      [SUMMARY]         : section_filters[SUMMARY]        && <Summary    filters={ filters } summary={resume.summary}       key='summary'/>,
+    };
+
+    const sections = section_order.map(s => section_mapping[s]).filter(s => s !== undefined);
+
     return (
       [
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark" key='nav'>
@@ -77,35 +101,17 @@ class App extends Component {
           </div>
         </div>,
         <Filters key='filters'/>,
-        sections[SUMMARY]        && <Summary    filters={ filters } summary={resume.summary}       key='summary'/>,
-        sections[SKILLS]         && <Skills     filters={ filters } skills={resume.skills}         key='skills'/>,
-        sections[EXPERIENCE]     &&
-          <Experience
-            filters={ filters }
-            experience={resume.experience}
-            projects={resume.projects}
-            sections={sections}
-            collapsed={collapsed}
-            collapseCallback={this.props.toggleCollapsed}
-            key='experience'/>,
-        sections[OTHER_PROJECTS] &&
-          <Projects
-            filters={ filters }
-            projects={resume.other}
-            collapsed={collapsed}
-            collapseCallback={this.props.toggleCollapsed}
-            key='projects'/>,
-            sections[EDUCATION]      && <Education  filters={ filters } schools={resume.education}     key='education'/>
+        ...sections
       ]
     );
   }
 }
 
 const mapStateToProps = ({filters, collapsed}) => {
-  console.log("IN WITH FILTERS: ", filters);
   return {
-    sections  : filters.section_filters,
-    filters   : filters.filters,
+    section_filters : filters.section_filters,
+    section_order   : filters.section_order,
+    filters         : filters.filters,
     collapsed
   };
 }

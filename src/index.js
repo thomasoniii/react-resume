@@ -25,7 +25,6 @@ const store = createStoreWithMiddleware(
 const loadStorage = storage.createLoader(engine);
 loadStorage(store)
   .then( (newState) => {
-    console.log("NEW STATE IS : ", newState);
     ReactDOM.render(
       <Provider store={store}>
         <App/>
