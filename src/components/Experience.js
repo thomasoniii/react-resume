@@ -68,7 +68,7 @@ export default ({experience, filters : all_filters, sections, projects, collapse
                   <span className='project-members'>{project.members} person team</span>
                   {project.url && (
                     <span className='float-right'>
-                      { project.url.map(url => <a href = {url} target='_blank'> {url}</a>) }
+                      { project.url.map(url => <a href = {url} target='_blank' rel="noopener noreferrer"> {url}</a>) }
                     </span>
                   )}
                 </div>
@@ -86,7 +86,7 @@ export default ({experience, filters : all_filters, sections, projects, collapse
                   <div className='col-md order-first'>
                     <ul style={{listStyle : 'none'}} className='float-right'>
                       {projects[project_name].url.map(url => {
-                        return <li key={url}><a href = {url} target='_blank'>{url}</a></li>
+                        return <li key={url}><a href = {url} target='_blank' rel="noopener noreferrer">{url}</a></li>
                       })}
                     </ul>
                   </div>

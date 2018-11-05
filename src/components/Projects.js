@@ -22,7 +22,7 @@ export default ( ({projects, filters : all_filters, collapsed, collapseCallback 
               {project.name}
             </div>
             {project.url && (
-              <div className='col-md-2 oneline'><a href = {project.url} target='_blank' onClick={(e) => { e.stopPropagation() }}> {project.url}</a></div>
+              <div className='col-md-2 oneline'><a href = {project.url} target='_blank' rel="noopener noreferrer" onClick={(e) => { e.stopPropagation() }}> {project.url}</a></div>
             )}
             <div className='col-md date order-sm-last'><div className='float-right'>{project.date}</div></div>
           </div>,

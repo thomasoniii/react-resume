@@ -78,7 +78,7 @@ class App extends Component {
     return (
       [
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark" key='nav'>
-          <a className="navbar-brand" href="">{ resume.contact.name }</a>
+          <a className="navbar-brand" href="#resume">{ resume.contact.name }</a>
 
           <div className="navbar-collapse" id="navbarToggler">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
