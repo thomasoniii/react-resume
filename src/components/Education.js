@@ -10,7 +10,7 @@ const Education = ({ schools }) => {
       </div>
       {schools.map((school) => {
         return (
-          <>
+          <React.Fragment key={school.school}>
             <div className="row" key="name">
               <div className="col-sm school">
                 <span className="school">{school.school}</span>,
@@ -23,7 +23,7 @@ const Education = ({ schools }) => {
             <div className="row" key="results">
               <div className="col results">{school.results}</div>
             </div>
-          </>
+          </React.Fragment>
         );
       })}
     </div>
