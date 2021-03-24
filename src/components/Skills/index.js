@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/Skills.css";
+import "./Skills.css";
 
 const NonMemoRenderSkillSet = ({ set, filters }) => {
   return set.map((cat) => {

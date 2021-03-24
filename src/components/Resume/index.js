@@ -4,19 +4,14 @@ import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
-import {
-  setFilters,
-  addFilters,
-  setCollapsed,
-  toggleCollapsed,
-} from "../actions";
+import { setFilters, addFilters, setCollapsed, toggleCollapsed } from "actions";
 
-import Projects from "./Projects";
-import Education from "./Education";
-import Experience from "./Experience";
-import Summary from "./Summary";
-import Skills from "./Skills";
-import Filters from "./Filters";
+import Projects from "components/Projects";
+import Education from "components/Education";
+import Experience from "components/Experience";
+import Summary from "components/Summary";
+import Skills from "components/Skills";
+import Filters from "components/Filters";
 
 import {
   EDUCATION,
@@ -24,11 +19,11 @@ import {
   OTHER_PROJECTS,
   SKILLS,
   SUMMARY,
-} from "../filter_types";
+} from "filter_types";
 
-import resume from "../data/resume.json";
+import resume from "data/resume.json";
 
-import "../styles/Resume.css";
+import "./Resume.css";
 
 class App extends Component {
   componentWillMount() {

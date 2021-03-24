@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { toggleFilter, expandAll, collapseAll } from "../actions";
+import { toggleFilter, expandAll, collapseAll } from "actions";
 
-import "../styles/Filters.css";
+import "./Filters.css";
 
 const Filters = () => {
   const { section_order, section_filters, filters, order } = useSelector(

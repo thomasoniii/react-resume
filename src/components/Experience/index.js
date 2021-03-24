@@ -1,9 +1,9 @@
 import React from "react";
 
-import RenderHighlight from "./Experience/RenderHighlight";
+import RenderHighlight from "./RenderHighlight";
 
-import { PROJECT_BLURBS } from "../filter_types";
-import "../styles/Experience.css";
+import { PROJECT_BLURBS } from "filter_types";
+import "./Experience.css";
 
 const Experience = ({
   experience,

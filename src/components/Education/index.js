@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/Education.css";
+import "./Education.css";
 
 const Education = ({ schools }) => {
   return (

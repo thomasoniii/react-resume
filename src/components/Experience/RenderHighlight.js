@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/Experience.css";
+import "./Experience.css";
 
 const NonMemoRenderHighlight = ({ highlight, filters }) => {
   if (Object.keys(filters).length && highlight.tech) {
