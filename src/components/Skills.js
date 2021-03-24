@@ -2,7 +2,7 @@ import React from "react";
 
 import "../styles/Skills.css";
 
-const renderSkillSet = (set, filters) => {
+const NonMemoRenderSkillSet = ({ set, filters }) => {
   return set.map((cat) => {
     return (
       <ul key={cat.type} className="skill-cat-list">
@@ -39,6 +39,8 @@ const renderSkillSet = (set, filters) => {
   });
 };
 
+const RenderSkillSet = React.memo(NonMemoRenderSkillSet);
+
 const Skills = (props) => {
   let professional = props.skills["Professional Skills"];
   let additional = props.skills["Additional Skills"];
@@ -55,8 +57,12 @@ const Skills = (props) => {
         <div className="col section-header">Skills</div>
       </div>
       <div className="row">
-        <div className="col-sm">{renderSkillSet(professional, filters)}</div>
-        <div className="col-sm">{renderSkillSet(additional, filters)}</div>
+        <div className="col-sm">
+          <RenderSkillSet set={professional} filters={filters} />
+        </div>
+        <div className="col-sm">
+          <RenderSkillSet set={additional} filters={filters} />
+        </div>
       </div>
     </div>
   );

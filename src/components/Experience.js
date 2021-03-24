@@ -1,38 +1,9 @@
 import React from "react";
 
+import RenderHighlight from "./Experience/RenderHighlight";
+
 import { PROJECT_BLURBS } from "../filter_types";
 import "../styles/Experience.css";
-
-const renderHighlight = (highlight, filters) => {
-  if (Object.keys(filters).length && highlight.tech) {
-    let shouldDisplay = highlight.tech.reduce((sd, f) => {
-      return sd || filters[f];
-    }, false);
-    if (!shouldDisplay) {
-      return null;
-    }
-  }
-
-  return (
-    <li key={highlight.blurb}>
-      {highlight.blurb}
-      {renderTech(highlight.tech, filters)}
-    </li>
-  );
-};
-
-const renderTech = (tech = [], filters) => {
-  if (!tech.length) {
-    return null;
-  }
-
-  return (
-    <div className="project-tech-box">
-      <span className="subsubheading">Technology used:</span>
-      <span className="project-tech">{tech.join(", ")}</span>
-    </div>
-  );
-};
 
 const Experience = ({
   experience,
@@ -155,7 +126,12 @@ const Experience = ({
                     <div className="col highlight">
                       <ul>
                         {project.highlights.map((highlight) => {
-                          return renderHighlight(highlight, filters);
+                          return (
+                            <RenderHighlight
+                              highlight={highlight}
+                              filters={filters}
+                            />
+                          );
                         })}
                       </ul>
                     </div>
