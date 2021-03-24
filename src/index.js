@@ -1,21 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk';
-import * as storage from 'redux-storage';
-import createEngine from 'redux-storage-engine-localstorage';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reduxThunk from "redux-thunk";
+import * as storage from "redux-storage";
+import createEngine from "redux-storage-engine-localstorage";
 
-import './index.css';
-import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
+import "./index.css";
+import Resume from "./components/Resume";
+import registerServiceWorker from "./registerServiceWorker";
 
-import reducers from './reducers';
+import reducers from "./reducers";
 
-const engine = createEngine('resume');
+const engine = createEngine("resume");
 const localStorageMiddleware = storage.createMiddleware(engine);
-const createStoreWithMiddleware = applyMiddleware(localStorageMiddleware, reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(
+  localStorageMiddleware,
+  reduxThunk
+)(createStore);
 
 const store = createStoreWithMiddleware(
   storage.reducer(reducers),
@@ -23,14 +26,12 @@ const store = createStoreWithMiddleware(
 );
 
 const loadStorage = storage.createLoader(engine);
-loadStorage(store)
-  .then( (newState) => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <App/>
-      </Provider>
-      ,
-      document.getElementById('root')
-    );
-    registerServiceWorker();
-  });
+loadStorage(store).then((newState) => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Resume />
+    </Provider>,
+    document.getElementById("root")
+  );
+  registerServiceWorker();
+});

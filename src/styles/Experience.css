@@ -1,64 +1,66 @@
 .duration {
-  font-style : italic;
+  font-style: italic;
 }
 
 .employer {
-  font-weight : bold;
-  text-decoration : underline;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .job-project {
-  margin-left : 2vh;
+  margin-left: 2vh;
 }
 
 .job-role {
-  margin-left : 1vh;
-  font-weight : bold;
+  margin-left: 1vh;
+  font-weight: bold;
 }
 
 .project-name {
-  font-weight : bold;
+  font-weight: bold;
 }
 
 .job-project-name {
-  font-style : italic;
+  font-style: italic;
 }
 
 .job-project-name::after {
-  content : ' - '
+  content: " - ";
 }
 
 .project-role {
-  text-decoration : underline;
+  text-decoration: underline;
 }
 
 .project-members::before {
-  content : ', '
+  content: ", ";
 }
 
 .project-highlight {
-  margin-left : 3vh;
+  margin-left: 3vh;
 }
 
 .project-tech {
-  font-style : italic;
-  color : gray;
+  font-style: italic;
+  color: gray;
 }
 
 .project-blurb {
-  font-style : italic;
-  font-size : 95%;
-  margin-left : 4vh;
+  font-style: italic;
+  font-size: 95%;
+  margin-left: 4vh;
 }
 
 .subsubheading {
-  text-decoration : underline;
+  text-decoration: underline;
 }
 
-.job-company:hover {
-  background-color : lightgray;
+.job-company,
+.job-project {
+  cursor: pointer;
 }
 
+.job-company:hover,
 .job-project:hover {
-  background-color : lightgray;
+  background-color: lightgray;
 }
