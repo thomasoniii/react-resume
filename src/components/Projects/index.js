@@ -28,48 +28,46 @@ const Projects = ({
             return null;
           }
         }
-        return [
-          <div
-            className="row project-name"
-            key={project.name}
-            onClick={() => {
-              collapseCallback(project.id);
-            }}
-          >
-            <div className="col-md project">{project.name}</div>
-            {project.url && (
-              <div className="col-md-2 oneline">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                >
-                  {" "}
-                  {project.url}
-                </a>
+        return (
+          <>
+            <div
+              className="row project-name"
+              key={project.name}
+              onClick={() => {
+                collapseCallback(project.id);
+              }}
+            >
+              <div className="col-md project">{project.name}</div>
+              {project.url && (
+                <div className="col-md-2 oneline">
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.url}
+                  </a>
+                </div>
+              )}
+              <div className="col-md date order-sm-last">
+                <div className="float-right">{project.date}</div>
+              </div>
+            </div>
+            {!collapsed[project.id] && (
+              <div className="row" key={project.description}>
+                <div className="col">{project.description}</div>
               </div>
             )}
-            <div className="col-md date order-sm-last">
-              <div className="float-right">{project.date}</div>
-            </div>
-          </div>,
-          !collapsed[project.id] && (
-            <div className="row" key={project.description}>
-              <div className="col">{project.description}</div>
-            </div>
-          ),
-          !collapsed[project.id] && project.tech && (
-            <div className="row" key={project.tech.join(",")}>
-              <div className="col">
-                Skills used:{" "}
-                <span className="tech">{project.tech.join(", ")}</span>
+            {!collapsed[project.id] && project.tech && (
+              <div className="row" key={project.tech.join(",")}>
+                <div className="col">
+                  Skills used:{" "}
+                  <span className="tech">{project.tech.join(", ")}</span>
+                </div>
               </div>
-            </div>
-          ),
-        ];
+            )}
+          </>
+        );
       })}
     </div>
   );

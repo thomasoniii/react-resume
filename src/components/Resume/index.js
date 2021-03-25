@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -61,9 +61,15 @@ const Resume = () => {
     filters = [],
     section_filters = [],
     section_order = [],
-  } = useSelector((state) => state.filters);
-  const collapsed = useSelector((state) => state.collapsed);
+    collapsed = false,
+  } = useSelector(({ filters, collapsed }) => ({ ...filters, collapsed }));
+
   const dispatch = useDispatch();
+
+  const collapseCallback = useMemo(
+    () => (id) => dispatch(toggleCollapsed(id)),
+    [dispatch]
+  );
 
   const section_mapping = {
     [EDUCATION]: section_filters[EDUCATION] && (
@@ -76,7 +82,7 @@ const Resume = () => {
         projects={resume.projects}
         sections={section_filters}
         collapsed={collapsed}
-        collapseCallback={(id) => dispatch(toggleCollapsed(id))}
+        collapseCallback={collapseCallback}
         key="experience"
       />
     ),
@@ -85,7 +91,7 @@ const Resume = () => {
         filters={filters}
         projects={resume.other}
         collapsed={collapsed}
-        collapseCallback={(id) => dispatch(toggleCollapsed(id))}
+        collapseCallback={collapseCallback}
         key="projects"
       />
     ),
