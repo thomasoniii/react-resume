@@ -1,16 +1,16 @@
 .projects {
-
 }
 
 .tech {
-  font-style : italic;
-  color : gray;
+  font-style: italic;
+  color: gray;
 }
 
 .project {
-  font-weight : bold;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .project-name:hover {
-  background-color : lightgray;
+  background-color: lightgray;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
@@ -21,11 +21,12 @@ import {
   SUMMARY,
 } from "filter_types";
 
-import resume from "data/resume.json";
-
 import "./Resume.css";
 
-class App extends Component {
+import resume from "data/resume.json";
+//const fetchPromise = fetch("/data/resume.json");
+/*
+class Resume extends Component {
   componentWillMount() {
     if (!Object.keys(this.props.filters).length) {
       if (resume.filters) {
@@ -53,97 +54,85 @@ class App extends Component {
       this.props.setCollapsed(collapsed);
     }
   }
+*/
 
-  render() {
-    const { filters, collapsed, section_filters, section_order } = this.props;
+const Resume = () => {
+  const {
+    filters = [],
+    section_filters = [],
+    section_order = [],
+  } = useSelector((state) => state.filters);
+  const collapsed = useSelector((state) => state.collapsed);
+  const dispatch = useDispatch();
 
-    const section_mapping = {
-      [EDUCATION]: section_filters[EDUCATION] && (
-        <Education
-          filters={filters}
-          schools={resume.education}
-          key="education"
-        />
-      ),
-      [EXPERIENCE]: section_filters[EXPERIENCE] && (
-        <Experience
-          filters={filters}
-          experience={resume.experience}
-          projects={resume.projects}
-          sections={section_filters}
-          collapsed={collapsed}
-          collapseCallback={this.props.toggleCollapsed}
-          key="experience"
-        />
-      ),
-      [OTHER_PROJECTS]: section_filters[OTHER_PROJECTS] && (
-        <Projects
-          filters={filters}
-          projects={resume.other}
-          collapsed={collapsed}
-          collapseCallback={this.props.toggleCollapsed}
-          key="projects"
-        />
-      ),
-      [SKILLS]: section_filters[SKILLS] && (
-        <Skills filters={filters} skills={resume.skills} key="skills" />
-      ),
-      [SUMMARY]: section_filters[SUMMARY] && (
-        <Summary filters={filters} summary={resume.summary} key="summary" />
-      ),
-    };
-
-    const sections = section_order
-      .map((s) => section_mapping[s])
-      .filter((s) => s !== undefined);
-
-    return [
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark" key="nav">
-        <a className="navbar-brand" href="#resume">
-          {resume.contact.name}
-        </a>
-
-        <div className="navbar-collapse" id="navbarToggler">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href={`tel:1-${resume.contact.phone}`}>
-                {resume.contact.phone}
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href={`mailto:${resume.contact.email}`}>
-                {resume.contact.email}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>,
-      <div className="container-fluid print-header" key="print-header">
-        <div className="row">
-          <div className="col print-name">{resume.contact.name}</div>
-          <div className="col print-phone">{resume.contact.phone}</div>
-          <div className="col print-email">{resume.contact.email}</div>
-        </div>
-      </div>,
-      <Filters key="filters" />,
-      ...sections,
-    ];
-  }
-}
-
-const mapStateToProps = ({ filters, collapsed }) => {
-  return {
-    section_filters: filters.section_filters,
-    section_order: filters.section_order,
-    filters: filters.filters,
-    collapsed,
+  const section_mapping = {
+    [EDUCATION]: section_filters[EDUCATION] && (
+      <Education filters={filters} schools={resume.education} key="education" />
+    ),
+    [EXPERIENCE]: section_filters[EXPERIENCE] && (
+      <Experience
+        filters={filters}
+        experience={resume.experience}
+        projects={resume.projects}
+        sections={section_filters}
+        collapsed={collapsed}
+        collapseCallback={(id) => dispatch(toggleCollapsed(id))}
+        key="experience"
+      />
+    ),
+    [OTHER_PROJECTS]: section_filters[OTHER_PROJECTS] && (
+      <Projects
+        filters={filters}
+        projects={resume.other}
+        collapsed={collapsed}
+        collapseCallback={(id) => dispatch(toggleCollapsed(id))}
+        key="projects"
+      />
+    ),
+    [SKILLS]: section_filters[SKILLS] && (
+      <Skills filters={filters} skills={resume.skills} key="skills" />
+    ),
+    [SUMMARY]: section_filters[SUMMARY] && (
+      <Summary filters={filters} summary={resume.summary} key="summary" />
+    ),
   };
+
+  const sections = section_order
+    .map((s) => section_mapping[s])
+    .filter((s) => s !== undefined);
+
+  return [
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark" key="nav">
+      <a className="navbar-brand" href="#resume">
+        {resume.contact.name}
+      </a>
+
+      <div className="navbar-collapse" id="navbarToggler">
+        <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <a className="nav-link" href={`tel:1-${resume.contact.phone}`}>
+              {resume.contact.phone}
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href={`mailto:${resume.contact.email}`}>
+              {resume.contact.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>,
+    <div className="container-fluid print-header" key="print-header">
+      <div className="row">
+        <div className="col print-name">{resume.contact.name}</div>
+        <div className="col print-phone">{resume.contact.phone}</div>
+        <div className="col print-email">{resume.contact.email}</div>
+      </div>
+    </div>,
+    <Filters key="filters" />,
+    ...sections,
+  ];
 };
 
-export default connect(mapStateToProps, {
-  setFilters,
-  addFilters,
-  setCollapsed,
-  toggleCollapsed,
-})(App);
+export default React.memo(Resume);
