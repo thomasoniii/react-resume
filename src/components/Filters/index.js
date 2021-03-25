@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import cx from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toggleFilter, expandAll, collapseAll } from "actions";
@@ -26,9 +27,10 @@ const Filters = () => {
           {section_order.map((filter) => {
             return (
               <button
-                className={`btn btn-sm filter-btn ${
-                  section_filters[filter] ? "btn-primary" : "btn-secondary"
-                }`}
+                className={cx("btn", "btn-sm", "filter-btn", {
+                  "btn-primary": section_filters[filter],
+                  "btn-secondary": !section_filters[filter],
+                })}
                 key={filter}
                 onClick={() => dispatch(toggleFilter(filter))}
               >
@@ -43,9 +45,10 @@ const Filters = () => {
           {order.map((filter) => {
             return (
               <button
-                className={`btn btn-sm filter-btn ${
-                  filters[filter] ? "btn-primary" : "btn-secondary"
-                }`}
+                className={cx("btn", "btn-sm", "filter-btn", {
+                  "btn-primary": filters[filter],
+                  "btn-secondary": !filters[filter],
+                })}
                 key={filter}
                 onClick={() => dispatch(toggleFilter(filter))}
               >
