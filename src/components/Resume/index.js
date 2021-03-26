@@ -1,11 +1,15 @@
 import React, { Suspense, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import "antd/dist/antd.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
 import { setFilters, addFilters, setCollapsed, toggleCollapsed } from "actions";
 import suspend from "suspend";
+
+import Header from "./Header";
 
 import Projects from "components/Projects";
 import Education from "components/Education";
@@ -109,27 +113,7 @@ const NonMemoResume = () => {
     .filter((s) => s !== undefined);
 
   return [
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark" key="nav">
-      <a className="navbar-brand" href="#resume">
-        {resume.contact.name}
-      </a>
-
-      <div className="navbar-collapse" id="navbarToggler">
-        <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <a className="nav-link" href={`tel:1-${resume.contact.phone}`}>
-              {resume.contact.phone}
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href={`mailto:${resume.contact.email}`}>
-              {resume.contact.email}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>,
+    <Header contact={resume.contact} />,
     <div className="container-fluid print-header" key="print-header">
       <div className="row">
         <div className="col print-name">{resume.contact.name}</div>

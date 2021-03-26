@@ -3,7 +3,6 @@ import React from "react";
 import "./Skills.css";
 
 const NonMemoSkillDuration = ({ skill }) => {
-  const since = skill.blurb.since;
   const duration = skill.blurb.since
     ? `${new Date().getFullYear() - skill.blurb.since} years`
     : skill.blurb.duration;
