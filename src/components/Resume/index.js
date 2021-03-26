@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React, { Suspense, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
 import { setFilters, addFilters, setCollapsed, toggleCollapsed } from "actions";
+import suspend from "suspend";
 
 import Projects from "components/Projects";
 import Education from "components/Education";
@@ -23,40 +24,13 @@ import {
 
 import "./Resume.css";
 
-import resume from "data/resume.json";
-//const fetchPromise = fetch("/data/resume.json");
-/*
-class Resume extends Component {
-  componentWillMount() {
-    if (!Object.keys(this.props.filters).length) {
-      if (resume.filters) {
-        this.props.setFilters(resume.filters);
-      }
-      if (resume.active_filters && !Object.keys(this.props.filters).length) {
-        this.props.addFilters(resume.active_filters);
-      }
-    }
+const fetchResume = fetch("./resume.json").then((res) => res.json());
 
-    if (!Object.keys(this.props.collapsed).length) {
-      let collapsed = {};
-      resume.experience.forEach((job) => {
-        collapsed[job.id] = job.collapsed || false;
-        if (job.projects) {
-          job.projects.forEach((project) => {
-            collapsed[project.project] = project.collapsed;
-          });
-        }
-      });
-      resume.other.forEach((project) => {
-        collapsed[project.id] = project.collapsed || false;
-      });
+const suspendedFetchResume = suspend(fetchResume);
 
-      this.props.setCollapsed(collapsed);
-    }
-  }
-*/
+const NonMemoResume = () => {
+  const resume = suspendedFetchResume();
 
-const Resume = () => {
   const {
     filters = [],
     section_filters = [],
@@ -65,6 +39,33 @@ const Resume = () => {
   } = useSelector(({ filters, collapsed }) => ({ ...filters, collapsed }));
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!Object.keys(filters).length) {
+      if (resume.filters) {
+        dispatch(setFilters(resume.filters));
+      }
+      if (resume.active_filters) {
+        dispatch(addFilters(resume.active_filters));
+      }
+    }
+    if (!Object.keys(collapsed).length) {
+      let newCollapsed = {};
+      resume.experience.forEach((job) => {
+        newCollapsed[job.id] = job.collapsed || false;
+        if (job.projects) {
+          job.projects.forEach((project) => {
+            newCollapsed[project.project] = project.collapsed;
+          });
+        }
+      });
+      resume.other.forEach((project) => {
+        newCollapsed[project.id] = project.collapsed || false;
+      });
+
+      setCollapsed(newCollapsed);
+    }
+  }, []);
 
   const collapseCallback = useMemo(
     () => (id) => dispatch(toggleCollapsed(id)),
@@ -141,4 +142,14 @@ const Resume = () => {
   ];
 };
 
-export default React.memo(Resume);
+const Resume = React.memo(NonMemoResume);
+
+const NonMemoResumeRetriever = () => {
+  return (
+    <Suspense fallback={"Loading..."}>
+      <Resume />
+    </Suspense>
+  );
+};
+
+export default React.memo(NonMemoResumeRetriever);
