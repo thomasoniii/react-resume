@@ -2,33 +2,20 @@ import React from "react";
 
 import "./Projects.css";
 
-const Projects = ({
-  projects,
-  filters: all_filters,
-  collapsed,
-  collapseCallback,
-}) => {
-  let filters = Object.keys(all_filters).reduce((acc, f) => {
-    if (all_filters[f]) {
-      acc[f] = true;
-    }
-    return acc;
-  }, {});
+const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
+  const hasFilters = Object.values(filters).some((v) => v === true);
+
+  const filteredProjects = projects.filter(
+    (project) =>
+      !hasFilters || !project.tech || project.tech.some((t) => filters[t])
+  );
 
   return (
     <div className="container-fluid section projects">
       <div className="row">
         <div className="col section-header">Other Projects</div>
       </div>
-      {projects.map((project) => {
-        if (Object.keys(filters).length && project.tech) {
-          let shouldDisplay = project.tech.reduce((sd, f) => {
-            return sd || filters[f];
-          }, false);
-          if (!shouldDisplay) {
-            return null;
-          }
-        }
+      {filteredProjects.map((project) => {
         return (
           <React.Fragment key={project.name}>
             <div
