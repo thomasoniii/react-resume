@@ -2,6 +2,23 @@ import React from "react";
 
 import "./Skills.css";
 
+const NonMemoSkillDuration = ({ skill }) => {
+  const since = skill.blurb.since;
+  const duration = skill.blurb.since
+    ? `${new Date().getFullYear() - skill.blurb.since} years`
+    : skill.blurb.duration;
+  return (
+    <>
+      <span className="skill-duration">{duration}</span>
+      {skill.blurb.level && (
+        <span className="skill-level">{skill.blurb.level}</span>
+      )}
+    </>
+  );
+};
+
+const SkillDuration = React.memo(NonMemoSkillDuration);
+
 const NonMemoRenderSkillSet = ({ set, filters }) => {
   return set.map((cat) => {
     return (
@@ -22,12 +39,7 @@ const NonMemoRenderSkillSet = ({ set, filters }) => {
                 <li key={skill.label}>
                   <span className="skill-label">{skill.label}</span>
                   <span className="float-right">
-                    <span className="skill-duration">
-                      {skill.blurb.duration}
-                    </span>
-                    {skill.blurb.level && (
-                      <span className="skill-level">{skill.blurb.level}</span>
-                    )}
+                    <SkillDuration skill={skill} />
                   </span>
                 </li>
               );
