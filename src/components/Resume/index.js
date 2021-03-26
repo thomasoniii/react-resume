@@ -6,7 +6,13 @@ import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
-import { setFilters, addFilters, setCollapsed, toggleCollapsed } from "actions";
+import {
+  setSectionFilters,
+  setTechFilters,
+  setTechOrder,
+  setCollapsed,
+  toggleCollapsed,
+} from "actions";
 import suspend from "suspend";
 
 import Header from "./Header";
@@ -36,22 +42,25 @@ const NonMemoResume = () => {
   const resume = suspendedFetchResume();
 
   const {
-    filters = [],
+    tech_filters = [],
     section_filters = [],
     section_order = [],
     collapsed = false,
-  } = useSelector(({ filters, collapsed }) => ({ ...filters, collapsed }));
+    tech_order = [],
+  } = useSelector(({ filters, collapsed }) => ({
+    ...filters,
+    collapsed,
+  }));
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!Object.keys(filters).length) {
-      if (resume.filters) {
-        dispatch(setFilters(resume.filters));
-      }
-      if (resume.active_filters) {
-        dispatch(addFilters(resume.active_filters));
-      }
+    if (!Object.keys(tech_filters).length && resume.active_tech_filters) {
+      dispatch(setTechFilters(resume.active_tech_filters));
+    }
+
+    if (!tech_order.length && resume.tech) {
+      dispatch(setTechOrder(resume.tech));
     }
     if (!Object.keys(collapsed).length) {
       let newCollapsed = {};
@@ -59,7 +68,7 @@ const NonMemoResume = () => {
         newCollapsed[job.id] = job.collapsed || false;
         if (job.projects) {
           job.projects.forEach((project) => {
-            newCollapsed[project.project] = project.collapsed;
+            newCollapsed[project.project] = project.collapsed || false;
           });
         }
       });
@@ -67,7 +76,7 @@ const NonMemoResume = () => {
         newCollapsed[project.id] = project.collapsed || false;
       });
 
-      setCollapsed(newCollapsed);
+      dispatch(setCollapsed(newCollapsed));
     }
   }, []);
 
@@ -77,12 +86,16 @@ const NonMemoResume = () => {
   );
 
   const section_mapping = {
-    [EDUCATION]: section_filters[EDUCATION] && (
-      <Education filters={filters} schools={resume.education} key="education" />
+    [EDUCATION]: (
+      <Education
+        filters={tech_filters}
+        schools={resume.education}
+        key="education"
+      />
     ),
-    [EXPERIENCE]: section_filters[EXPERIENCE] && (
+    [EXPERIENCE]: (
       <Experience
-        filters={filters}
+        filters={tech_filters}
         experience={resume.experience}
         projects={resume.projects}
         sections={section_filters}
@@ -91,37 +104,31 @@ const NonMemoResume = () => {
         key="experience"
       />
     ),
-    [OTHER_PROJECTS]: section_filters[OTHER_PROJECTS] && (
+    [OTHER_PROJECTS]: (
       <Projects
-        filters={filters}
+        filters={tech_filters}
         projects={resume.other}
         collapsed={collapsed}
         collapseCallback={collapseCallback}
         key="projects"
       />
     ),
-    [SKILLS]: section_filters[SKILLS] && (
-      <Skills filters={filters} skills={resume.skills} key="skills" />
+    [SKILLS]: (
+      <Skills filters={tech_filters} skills={resume.skills} key="skills" />
     ),
-    [SUMMARY]: section_filters[SUMMARY] && (
-      <Summary filters={filters} summary={resume.summary} key="summary" />
+    [SUMMARY]: (
+      <Summary filters={tech_filters} summary={resume.summary} key="summary" />
     ),
   };
 
   const sections = section_order
-    .map((s) => section_mapping[s])
-    .filter((s) => s !== undefined);
+    .filter((s) => section_filters.includes(s))
+    .map((s) => section_mapping[s]);
 
   return [
-    <Header contact={resume.contact} />,
-    <div className="container-fluid print-header" key="print-header">
-      <div className="row">
-        <div className="col print-name">{resume.contact.name}</div>
-        <div className="col print-phone">{resume.contact.phone}</div>
-        <div className="col print-email">{resume.contact.email}</div>
-      </div>
-    </div>,
-    <Filters key="filters" />,
+    <Header key="header" contact={resume.contact} />,
+
+    <Filters key="tech_filters" />,
     ...sections,
   ];
 };

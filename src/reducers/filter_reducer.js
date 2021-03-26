@@ -1,67 +1,53 @@
-import { SET_FILTERS, ADD_FILTER, ADD_FILTERS, DROP_FILTER, TOGGLE_FILTER } from '../actions/types';
+import {
+  SET_SECTION_FILTERS,
+  SET_TECH_FILTERS,
+  SET_TECH_ORDER,
+} from "../actions/types";
 
-import * as types from '../filter_types';
+import * as types from "../filter_types";
 
-const filters = Object.values(types).reduce((acc, type) => {acc[type] = true; return acc}, {});
+const section_order = [
+  types.SUMMARY,
+  types.SKILLS,
+  types.EXPERIENCE,
+  types.OTHER_PROJECTS,
+  types.EDUCATION,
+  types.PROJECT_BLURBS,
+];
 
 const INITIAL = {
-  section_order   : [types.SUMMARY, types.SKILLS, types.EXPERIENCE, types.OTHER_PROJECTS, types.EDUCATION, types.PROJECT_BLURBS],
-  section_filters : {...filters},
-  order : [],
-  filters : {}
+  section_order,
+  section_filters: section_order.filter((s) => s !== types.PROJECT_BLURBS),
+  tech_order: [],
+  tech_filters: [],
 };
 
-INITIAL.section_filters[types.PROJECT_BLURBS] = false;
-
 export default (state = INITIAL, action) => {
-
   switch (action.type) {
-    case SET_FILTERS : {
+    case SET_SECTION_FILTERS: {
+      const { filters: section_filters } = action.payload;
       return {
         ...state,
-        order   : action.payload,
-        filters : action.payload.reduce( (acc, filter) => { acc[filter] = false; return acc }, {})
+        section_filters,
       };
     }
-    case ADD_FILTERS : {
+    case SET_TECH_FILTERS: {
+      const { filters: tech_filters } = action.payload;
       return {
         ...state,
-        order   : state.order,
-        filters : {...state.filters, ...action.payload.reduce( (acc, filter) => { acc[filter] = true; return acc }, {})}
+        tech_filters,
       };
     }
-    case ADD_FILTER : {
-      let newState = {...state};
-      if (newState.section_filters[action.payload] !== undefined) {
-        newState.section_filters = {...newState.section_filters, [action.payload] : true}
-      }
-      else if (newState.filters[action.payload] !== undefined) {
-        newState.filters = {...newState.filters, [action.payload] : true}
-      }
-      return newState;
+    case SET_TECH_ORDER: {
+      const { order: tech_order } = action.payload;
+      return {
+        ...state,
+        tech_order,
+      };
     }
-    case DROP_FILTER : {
-      let newState = {...state};
-      if (newState.section_filters[action.payload] !== undefined) {
-        newState.section_filters = {...newState.section_filters, [action.payload] : false}
-      }
-      else if (newState.filters[action.payload] !== undefined) {
-        newState.filters = {...newState.filters, [action.payload] : false}
-      }
-      return newState;
-    }
-    case TOGGLE_FILTER : {
-      let newState = {...state};
-      if (newState.section_filters[action.payload] !== undefined) {
-        newState.section_filters = {...newState.section_filters, [action.payload] : !newState.section_filters[action.payload]}
-      }
-      else if (newState.filters[action.payload] !== undefined) {
-        newState.filters = {...newState.filters, [action.payload] : !newState.filters[action.payload]}
-      }
-      return newState;
-    }
-    default : {
+
+    default: {
       return state;
     }
   }
-}
+};

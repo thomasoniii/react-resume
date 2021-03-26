@@ -3,11 +3,11 @@ import React from "react";
 import "./Projects.css";
 
 const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
-  const hasFilters = Object.values(filters).some((v) => v === true);
-
   const filteredProjects = projects.filter(
     (project) =>
-      !hasFilters || !project.tech || project.tech.some((t) => filters[t])
+      !filters.length ||
+      !project.tech ||
+      project.tech.some((t) => filters.includes(t))
   );
 
   return (
