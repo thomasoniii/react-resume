@@ -14,6 +14,7 @@ const Projects = ({
     }
     return acc;
   }, {});
+
   return (
     <div className="container-fluid section projects">
       <div className="row">
@@ -29,7 +30,7 @@ const Projects = ({
           }
         }
         return (
-          <>
+          <React.Fragment key={project.name}>
             <div
               className="row project-name"
               key={project.name}
@@ -66,7 +67,7 @@ const Projects = ({
                 </div>
               </div>
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </div>
