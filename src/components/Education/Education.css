@@ -1,20 +1,8 @@
-.education {
-  page-break-after: always;
-}
-
-.education, .education ul {
-  list-style-type : none
-}
-
-.education > li:first-child {
-  font-weight : bold;
-  font-size : 3vh;
-}
-
-.school {
-  font-weight : bold;
+.school-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .results {
-  font-style : italic;
+  font-style: italic;
 }

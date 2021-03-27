@@ -35,7 +35,9 @@ const NonMemoRenderSkillSet = ({ set, filters = [] }) => {
         dataSource={filteredItems}
         renderItem={(skill) => (
           <List.Item className="skill-item">
-            <span className="skill-label">{skill.label}</span>
+            <span className="skill-label">
+              <Text strong>{skill.label}</Text>
+            </span>
             <span className="skill-value">
               <SkillDuration skill={skill} />
             </span>

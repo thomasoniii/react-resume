@@ -1,37 +1,34 @@
 import React from "react";
+import { Card, Typography, List } from "antd";
 
 import "./Education.css";
 
-const NonMemoSchool = ({ school }) => (
-  <>
-    <div className="row" key="name">
-      <div className="col-sm school">
-        <span className="school">{school.school}</span>,
-        <span className="location"> {school.location}</span>
-      </div>
-      <div className="col-sm">
-        <div className="float-right date">{school.date}</div>
-      </div>
-    </div>
-    <div className="row" key="results">
-      <div className="col results">{school.results}</div>
-    </div>
-  </>
+const { Title, Text } = Typography;
+
+const Education = ({ schools }) => (
+  <Card title={<Title level={2}>Education</Title>}>
+    <List
+      dataSource={schools}
+      renderItem={(school) => (
+        <List.Item className="school">
+          <List.Item.Meta
+            title={
+              <div className="school-container">
+                <span>
+                  <span className="school-name">
+                    <Text strong>{school.school}</Text>
+                  </span>
+                  , <span className="location">{school.location}</span>
+                </span>
+                <span className="date">{school.date}</span>
+              </div>
+            }
+            description={school.results}
+          />
+        </List.Item>
+      )}
+    />
+  </Card>
 );
-
-const School = React.memo(NonMemoSchool);
-
-const Education = ({ schools }) => {
-  return (
-    <div className="section education container-fluid">
-      <div className="row">
-        <div className="col section-header">Education</div>
-      </div>
-      {schools.map((school) => (
-        <School school={school} key={school.school} />
-      ))}
-    </div>
-  );
-};
 
 export default React.memo(Education);
