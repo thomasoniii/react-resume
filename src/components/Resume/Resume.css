@@ -33,6 +33,7 @@
 
 .resume-container {
   display: grid;
+  grid-gap: 5px;
   //grid-template-columns: 3fr 1fr;
 }
 
