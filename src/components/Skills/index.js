@@ -1,6 +1,9 @@
 import React from "react";
+import { List, Card, Typography } from "antd";
 
 import "./Skills.css";
+
+const { Title, Text } = Typography;
 
 const NonMemoSkillDuration = ({ skill }) => {
   const duration = skill.blurb.since
@@ -18,64 +21,44 @@ const NonMemoSkillDuration = ({ skill }) => {
 
 const SkillDuration = React.memo(NonMemoSkillDuration);
 
-const NonMemoRenderSkillSet = ({ set, filters }) => {
+const NonMemoRenderSkillSet = ({ set, filters = [] }) => {
   return set.map((cat) => {
+    const filteredItems = cat.items.filter(
+      (item) =>
+        !filters.length ||
+        !item.tech ||
+        item.tech.some((t) => filters.includes(t))
+    );
     return (
-      <ul key={cat.type} className="skill-cat-list">
-        <li className="skill-type">{cat.type}</li>
-        <li>
-          <ul className="skill-list">
-            {cat.items.map((skill) => {
-              if (Object.keys(filters).length && skill.filters !== undefined) {
-                let shouldDisplay = skill.filters.reduce((sd, f) => {
-                  return sd || filters[f];
-                }, false);
-                if (!shouldDisplay) {
-                  return null;
-                }
-              }
-              return (
-                <li key={skill.label}>
-                  <span className="skill-label">{skill.label}</span>
-                  <span className="float-right">
-                    <SkillDuration skill={skill} />
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </li>
-      </ul>
+      <List
+        header={<Title level={4}>{cat.type}</Title>}
+        dataSource={filteredItems}
+        renderItem={(skill) => (
+          <List.Item className="skill-item">
+            <span className="skill-label">{skill.label}</span>
+            <span className="skill-value">
+              <SkillDuration skill={skill} />
+            </span>
+          </List.Item>
+        )}
+      />
     );
   });
 };
 
 const RenderSkillSet = React.memo(NonMemoRenderSkillSet);
 
-const Skills = (props) => {
-  let professional = props.skills["Professional Skills"];
-  let additional = props.skills["Additional Skills"];
-  let filters = Object.keys(props.filters).reduce((acc, f) => {
-    if (props.filters[f]) {
-      acc[f] = true;
-    }
-    return acc;
-  }, {});
+const Skills = ({ skills, filters }) => {
+  let professional = skills["Professional Skills"];
+  let additional = skills["Additional Skills"];
 
   return (
-    <div className="container-fluid section skills">
-      <div className="row">
-        <div className="col section-header">Skills</div>
+    <Card title={<Title level={2}>Skills</Title>}>
+      <div className="skills-container">
+        <RenderSkillSet set={professional} filters={filters} />
+        <RenderSkillSet set={additional} filters={filters} />
       </div>
-      <div className="row">
-        <div className="col-sm">
-          <RenderSkillSet set={professional} filters={filters} />
-        </div>
-        <div className="col-sm">
-          <RenderSkillSet set={additional} filters={filters} />
-        </div>
-      </div>
-    </div>
+    </Card>
   );
 };
 

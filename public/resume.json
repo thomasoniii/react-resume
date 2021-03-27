@@ -6,7 +6,7 @@
     "phone": "800-I-WORK-4U"
   },
 
-  "filters": ["Tech I know", "Other Tech I know", "More Tech I Know"],
+  "tech": ["Tech I know", "Other Tech I know", "More Tech I Know"],
   "active_filters": [],
 
   "summary": [
@@ -27,7 +27,7 @@
               "duration": "I've been doing it 8 years",
               "level": "I am awesome at it"
             },
-            "filters": ["Tech I know"]
+            "tech": ["Tech I know"]
           },
           {
             "label": "This is another tech I know",
@@ -35,7 +35,7 @@
               "duration": "I've been doing it 4 years",
               "level": "I am pretty good at it"
             },
-            "filters": ["Other Tech I know"]
+            "tech": ["Other Tech I know"]
           },
           {
             "label": "This is more tech I know",
@@ -43,7 +43,7 @@
               "duration": "I've been doing it 2 years",
               "level": "I am okay at it"
             },
-            "filters": ["More Tech I know"]
+            "tech": ["More Tech I know"]
           },
           {
             "label": "This is tech i always want to show, so it's unfiltered.",
@@ -62,7 +62,7 @@
               "duration": "I've been doing it 18 years",
               "level": "I am awesome at it"
             },
-            "filters": ["Tech I know"]
+            "tech": ["Tech I know"]
           }
         ]
       },

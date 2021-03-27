@@ -1,5 +1,6 @@
 import React, { Suspense, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Skeleton } from "antd";
 
 import "antd/dist/antd.css";
 
@@ -137,7 +138,7 @@ const Resume = React.memo(NonMemoResume);
 
 const NonMemoResumeRetriever = () => {
   return (
-    <Suspense fallback={"Loading..."}>
+    <Suspense fallback={<Skeleton active />}>
       <Resume />
     </Suspense>
   );

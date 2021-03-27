@@ -1,33 +1,57 @@
+.ant-list-item.skill-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.ant-list-item.skill-item .skill-value {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.skill-label {
+  font-weight: bold;
+}
+
 .skills ul {
-  list-style : none;
+  list-style: none;
 }
 
 .skill-type {
-  font-weight : bold;
+  font-weight: bold;
 }
 
 .skill-duration {
-  font-style : italic;
+  font-style: italic;
 }
 
 .skill-level {
-  font-style : italic;
+  font-style: italic;
 }
 
 .skill-level::before {
-  content : " ("
+  content: " (";
 }
 
 .skill-level::after {
-  content : ")"
+  content: ")";
 }
 
 .skill-cat-list {
-  padding-left : 1vh;
+  padding-left: 1vh;
 }
 
 .skill-list {
-  padding-left : 1vh;
+  padding-left: 1vh;
 }
 
 .oneline {
