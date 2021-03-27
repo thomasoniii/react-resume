@@ -2,6 +2,12 @@ import React from "react"
 import PropTypes from "prop-types"
 import { PageHeader, Button } from "antd"
 
+// import and define any icons you'd like here. We're using ant-design, and then just set a mapping
+// from the string -> component in the AvailableIcons set and you're done.
+import { GithubOutlined } from "@ant-design/icons"
+
+const AvailableIcons = { GithubOutlined }
+
 const Header = ({ contact }) => (
   <>
     <PageHeader
@@ -9,7 +15,16 @@ const Header = ({ contact }) => (
       title={contact.name}
       subTitle={contact.blurb}
       extra={[
-        <Button key="phone" href={contact.phone}>
+        ...(contact.urls || []).map((site) => {
+          const Icon = AvailableIcons[site.icon]
+
+          return (
+            <Button key={site.url} href={site.url}>
+              {AvailableIcons[site.icon] && <Icon />} {site.label || site.url}
+            </Button>
+          )
+        }),
+        <Button key="phone" href={`tel:${contact.phone}`}>
           {contact.phone}
         </Button>,
         <Button key="email" href={`mailto:${contact.email}`} type="primary">
@@ -18,11 +33,20 @@ const Header = ({ contact }) => (
       ]}
     />
     <div className="print-header">
-      <div>
-        <div className="print-name">{contact.name}</div>
-        <div className="print-phone">{contact.phone}</div>
-        <div className="print-email">{contact.email}</div>
-      </div>
+      <span className="print-name">{contact.name}</span>
+      <a href={`tel:${contact.phone}`}>{contact.phone}</a>
+      <a href={`mailto:${contact.email}`}>{contact.email}</a>
+    </div>
+    <div className="print-header">
+      {(contact.urls || []).map((site) => {
+        const Icon = AvailableIcons[site.icon]
+
+        return (
+          <a key={site.url} href={site.url}>
+            {AvailableIcons[site.icon] && <Icon />} {site.label || site.url}
+          </a>
+        )
+      })}
     </div>
   </>
 )

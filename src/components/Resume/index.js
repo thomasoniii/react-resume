@@ -49,6 +49,8 @@ function getGridColumns(section_filters) {
 const NonMemoResume = () => {
   const resume = suspendedFetchResume()
 
+  document.title = resume.contact.name
+
   const {
     tech_filters = [],
     section_filters = [],
@@ -139,7 +141,7 @@ const NonMemoResume = () => {
       section_filters.includes(SKILLS)) && (
       <div
         className="resume-container"
-        style={{ "grid-template-columns": getGridColumns(section_filters) }}
+        style={{ gridTemplateColumns: getGridColumns(section_filters) }}
       >
         <div className="left-column">
           {section_filters.includes(EXPERIENCE) && section_mapping[EXPERIENCE]}

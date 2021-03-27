@@ -29,6 +29,12 @@
   font-size: 150%;
   border-bottom: 6px double black;
   display: none;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.print-header * {
+  white-space: nowrap;
 }
 
 .resume-container {
@@ -42,6 +48,6 @@
     display: none;
   }
   .print-header {
-    display: block;
+    display: flex;
   }
 }

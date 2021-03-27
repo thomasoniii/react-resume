@@ -3,7 +3,15 @@
     "name": "YOUR NAME HERE",
     "blurb": "Solver of your problems",
     "email": "YOU@YOUREMAILADDRESS",
-    "phone": "800-I-WORK-4U"
+    "phone": "800-I-WORK-4U",
+    "urls": [
+      {
+        "url": "https://github.com/thomasoniii/react-resume",
+        "label": "react-resume",
+        "icon": "GithubOutlined"
+      },
+      { "url": "https://google.com", "label": "My awesome page" }
+    ]
   },
 
   "tech": ["Tech I know", "Other Tech I know", "More Tech I Know"],
