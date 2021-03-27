@@ -6,7 +6,7 @@ import "./Education.css";
 const { Title, Text } = Typography;
 
 const Education = ({ schools }) => (
-  <Card title={<Title level={2}>Education</Title>}>
+  <Card size="small" title={<Title level={2}>Education</Title>}>
     <List
       dataSource={schools}
       renderItem={(school) => (

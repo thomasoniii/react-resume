@@ -19,7 +19,7 @@ const Experience = ({
   collapseCallback,
 }) => {
   return (
-    <Card title={<Title level={2}>Experience</Title>}>
+    <Card size="small" title={<Title level={2}>Experience</Title>}>
       <Timeline>
         {experience.map((job) => (
           <Timeline.Item

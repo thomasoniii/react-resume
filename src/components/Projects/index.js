@@ -19,7 +19,7 @@ const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
     return null;
   }
   return (
-    <Card title={<Title level={2}>Projects</Title>}>
+    <Card size="small" title={<Title level={2}>Projects</Title>}>
       <List
         dataSource={filteredProjects}
         renderItem={(project) => (

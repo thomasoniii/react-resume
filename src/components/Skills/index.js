@@ -31,6 +31,7 @@ const NonMemoRenderSkillSet = ({ set, filters = [] }) => {
     );
     return (
       <List
+        size="small"
         key={cat.type}
         header={<Title level={4}>{cat.type}</Title>}
         dataSource={filteredItems}
@@ -56,7 +57,7 @@ const Skills = ({ skills, filters }) => {
   let additional = skills["Additional Skills"];
 
   return (
-    <Card title={<Title level={2}>Skills</Title>}>
+    <Card size="small" title={<Title level={2}>Skills</Title>}>
       <div className="skills-container">
         <RenderSkillSet set={professional} filters={filters} />
         <RenderSkillSet set={additional} filters={filters} />

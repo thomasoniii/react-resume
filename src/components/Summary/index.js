@@ -3,7 +3,7 @@ import { Card, Typography } from "antd";
 const { Title } = Typography;
 
 const Summary = ({ summary }) => (
-  <Card title={<Title level={2}>Summary</Title>}>
+  <Card size="small" title={<Title level={2}>Summary</Title>}>
     {summary.map((p, i) => (
       <p key={i}>{p}</p>
     ))}
