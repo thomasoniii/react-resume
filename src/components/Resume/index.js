@@ -1,25 +1,25 @@
-import React, { Suspense, useMemo, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Skeleton } from "antd";
+import React, { Suspense, useMemo, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { Skeleton } from "antd"
 
-import "antd/dist/antd.css";
+import "antd/dist/antd.css"
 
 import {
   setTechFilters,
   setTechOrder,
   setCollapsed,
   toggleCollapsed,
-} from "actions";
-import suspend from "suspend";
+} from "actions"
+import suspend from "suspend"
 
-import Header from "./Header";
+import Header from "./Header"
 
-import Projects from "components/Projects";
-import Education from "components/Education";
-import Experience from "components/Experience";
-import Summary from "components/Summary";
-import Skills from "components/Skills";
-import Filters from "components/Filters";
+import Projects from "components/Projects"
+import Education from "components/Education"
+import Experience from "components/Experience"
+import Summary from "components/Summary"
+import Skills from "components/Skills"
+import Filters from "components/Filters"
 
 import {
   EDUCATION,
@@ -27,71 +27,71 @@ import {
   OTHER_PROJECTS,
   SKILLS,
   SUMMARY,
-} from "filter_types";
+} from "filter_types"
 
-import "./Resume.css";
+import "./Resume.css"
 
-const fetchResume = fetch("./resume.json").then((res) => res.json());
+const fetchResume = fetch("./resume.json").then((res) => res.json())
 
-const suspendedFetchResume = suspend(fetchResume);
+const suspendedFetchResume = suspend(fetchResume)
 
 function getGridColumns(section_filters) {
   if (
     section_filters.includes(EXPERIENCE) &&
     section_filters.includes(SKILLS)
   ) {
-    return "3fr 1fr";
+    return "3fr 1fr"
   } else {
-    return "1fr";
+    return "1fr"
   }
 }
 
 const NonMemoResume = () => {
-  const resume = suspendedFetchResume();
+  const resume = suspendedFetchResume()
 
   const {
     tech_filters = [],
     section_filters = [],
-    section_order = [],
+    // section_order = [],
     collapsed = false,
     tech_order = [],
-  } = useSelector(({ filters, collapsed }) => ({
+  } = useSelector(({ filters, collapsed: c }) => ({
     ...filters,
-    collapsed,
-  }));
+    collapsed: c,
+  }))
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (!Object.keys(tech_filters).length && resume.active_tech_filters) {
-      dispatch(setTechFilters(resume.active_tech_filters));
+      dispatch(setTechFilters(resume.active_tech_filters))
     }
 
     if (!tech_order.length && resume.tech) {
-      dispatch(setTechOrder(resume.tech));
+      dispatch(setTechOrder(resume.tech))
     }
     if (!Object.keys(collapsed).length) {
-      let newCollapsed = {};
+      const newCollapsed = {}
       resume.experience.forEach((job) => {
-        newCollapsed[job.id] = job.collapsed || false;
+        newCollapsed[job.id] = job.collapsed || false
         if (job.projects) {
           job.projects.forEach((project) => {
-            newCollapsed[project.project] = project.collapsed || false;
-          });
+            newCollapsed[project.project] = project.collapsed || false
+          })
         }
-      });
+      })
       resume.other.forEach((project) => {
-        newCollapsed[project.id] = project.collapsed || false;
-      });
+        newCollapsed[project.id] = project.collapsed || false
+      })
 
-      dispatch(setCollapsed(newCollapsed));
+      dispatch(setCollapsed(newCollapsed))
     }
-  }, []);
+  }, [collapsed, resume, dispatch, tech_filters, tech_order])
 
   const collapseCallback = useMemo(
     () => (id) => dispatch(toggleCollapsed(id)),
     [dispatch]
-  );
+  )
 
   const section_mapping = {
     [EDUCATION]: (
@@ -127,17 +127,13 @@ const NonMemoResume = () => {
     [SUMMARY]: (
       <Summary filters={tech_filters} summary={resume.summary} key="summary" />
     ),
-  };
-
-  const sections = section_order
-    .filter((s) => section_filters.includes(s))
-    .map((s) => section_mapping[s]);
+  }
 
   return [
     <Header key="header" contact={resume.contact} />,
 
     <Filters key="tech_filters" />,
-    //...sections,
+    // ...sections,
     section_filters.includes(SUMMARY) && section_mapping[SUMMARY],
     (section_filters.includes(EXPERIENCE) ||
       section_filters.includes(SKILLS)) && (
@@ -155,10 +151,10 @@ const NonMemoResume = () => {
     ),
     section_filters.includes(OTHER_PROJECTS) && section_mapping[OTHER_PROJECTS],
     section_filters.includes(EDUCATION) && section_mapping[EDUCATION],
-  ];
-};
+  ]
+}
 
-const Resume = React.memo(NonMemoResume);
+const Resume = React.memo(NonMemoResume)
 
 const NonMemoResumeRetriever = () => {
   return (
@@ -174,7 +170,7 @@ const NonMemoResumeRetriever = () => {
     >
       <Resume />
     </Suspense>
-  );
-};
+  )
+}
 
-export default React.memo(NonMemoResumeRetriever);
+export default React.memo(NonMemoResumeRetriever)

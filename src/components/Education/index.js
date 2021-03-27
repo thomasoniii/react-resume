@@ -1,9 +1,10 @@
-import React from "react";
-import { Card, Typography, List } from "antd";
+import React from "react"
+import PropTypes from "prop-types"
+import { Card, Typography, List } from "antd"
 
-import "./Education.css";
+import "./Education.css"
 
-const { Title, Text } = Typography;
+const { Title, Text } = Typography
 
 const Education = ({ schools }) => (
   <Card size="small" title={<Title level={2}>Education</Title>}>
@@ -29,6 +30,10 @@ const Education = ({ schools }) => (
       )}
     />
   </Card>
-);
+)
 
-export default React.memo(Education);
+Education.propTypes = {
+  schools: PropTypes.object,
+}
+
+export default React.memo(Education)

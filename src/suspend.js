@@ -1,27 +1,27 @@
 const suspend = (promise) => {
-  let result;
-  let status = "pending";
+  let result = null
+  let status = "pending"
   const suspender = promise.then(
     (response) => {
-      status = "success";
-      result = response;
+      status = "success"
+      result = response
     },
     (error) => {
-      status = "error";
-      result = error;
+      status = "error"
+      result = error
     }
-  );
+  )
 
   return () => {
     switch (status) {
       case "pending":
-        throw suspender;
+        throw suspender
       case "error":
-        throw result;
+        throw result
       default:
-        return result;
+        return result
     }
-  };
-};
+  }
+}
 
-export default suspend;
+export default suspend

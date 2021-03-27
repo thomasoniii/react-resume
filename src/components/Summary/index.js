@@ -1,6 +1,7 @@
-import React from "react";
-import { Card, Typography } from "antd";
-const { Title } = Typography;
+import React from "react"
+import PropTypes from "prop-types"
+import { Card, Typography } from "antd"
+const { Title } = Typography
 
 const Summary = ({ summary }) => (
   <Card size="small" title={<Title level={2}>Summary</Title>}>
@@ -8,6 +9,8 @@ const Summary = ({ summary }) => (
       <p key={i}>{p}</p>
     ))}
   </Card>
-);
+)
 
-export default React.memo(Summary);
+Summary.propTypes = { summary: PropTypes.object }
+
+export default React.memo(Summary)

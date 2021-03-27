@@ -1,7 +1,8 @@
-import React from "react";
+import React from "react"
+import PropTypes from "prop-types"
 
-import { PROJECT_BLURBS } from "filter_types";
-import RenderHighlight from "./RenderHighlight";
+import { PROJECT_BLURBS } from "filter_types"
+import RenderHighlight from "./RenderHighlight"
 
 const JobProject = ({
   project,
@@ -11,14 +12,14 @@ const JobProject = ({
   projects,
   filters,
 }) => {
-  const project_name = project.project;
+  const project_name = project.project
   return (
     <React.Fragment key={project_name}>
       <div
         className="job-project"
         key={`${project_name}-info`}
         onClick={() => {
-          collapseCallback(project_name);
+          collapseCallback(project_name)
         }}
       >
         <div>
@@ -28,7 +29,12 @@ const JobProject = ({
           {project.url && (
             <span className="float-right">
               {project.url.map((url) => (
-                <a href={url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={url}
+                >
                   {" "}
                   {url}
                 </a>
@@ -53,7 +59,7 @@ const JobProject = ({
                         {url}
                       </a>
                     </li>
-                  );
+                  )
                 })}
               </ul>
             </div>
@@ -71,14 +77,23 @@ const JobProject = ({
                     highlight={highlight}
                     filters={filters}
                   />
-                );
+                )
               })}
             </ul>
           </div>
         </div>
       )}
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default React.memo(JobProject);
+JobProject.propTypes = {
+  project: PropTypes.object,
+  collapseCallback: PropTypes.func,
+  collapsed: PropTypes.bool,
+  sections: PropTypes.array,
+  projects: PropTypes.object,
+  filters: PropTypes.array,
+}
+
+export default React.memo(JobProject)

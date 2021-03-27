@@ -1,14 +1,12 @@
-import React from "react";
-import { Card, Typography, List, Timeline } from "antd";
+import React from "react"
+import PropTypes from "prop-types"
+import { Card, Typography, Timeline } from "antd"
 
-import Tech from "components/Tech";
-import RenderHighlight from "./RenderHighlight";
-import JobProject from "./JobProject";
+import JobProject from "./JobProject"
 
-import { PROJECT_BLURBS } from "filter_types";
-import "./Experience.css";
+import "./Experience.css"
 
-const { Title, Text } = Typography;
+const { Title } = Typography
 
 const Experience = ({
   experience,
@@ -29,7 +27,7 @@ const Experience = ({
             <div
               className="job-container"
               onClick={() => {
-                collapseCallback(job.id);
+                collapseCallback(job.id)
               }}
             >
               <span className="job-name">
@@ -73,7 +71,16 @@ const Experience = ({
         ))}
       </Timeline>
     </Card>
-  );
-};
+  )
+}
 
-export default React.memo(Experience);
+Experience.propTypes = {
+  experience: PropTypes.object,
+  tech_filters: PropTypes.array,
+  sections: PropTypes.object,
+  projects: PropTypes.object,
+  collapsed: PropTypes.bool,
+  collapseCallback: PropTypes.func,
+}
+
+export default React.memo(Experience)

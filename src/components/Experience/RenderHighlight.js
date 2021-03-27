@@ -1,22 +1,25 @@
-import React from "react";
+import React from "react"
+import PropTypes from "prop-types"
 
-import Tech from "components/Tech";
+import Tech from "components/Tech"
 
-import "./Experience.css";
+import "./Experience.css"
 
 const NonMemoRenderTech = ({ tech = [] }) => {
   if (!tech.length) {
-    return null;
+    return null
   }
 
   return (
     <div className="project-tech-box">
       <Tech tech={tech} />
     </div>
-  );
-};
+  )
+}
 
-const RenderTech = React.memo(NonMemoRenderTech);
+NonMemoRenderTech.propTypes = { tech: PropTypes.array }
+
+const RenderTech = React.memo(NonMemoRenderTech)
 
 const NonMemoRenderHighlight = ({ highlight, filters = [] }) => {
   if (
@@ -24,7 +27,7 @@ const NonMemoRenderHighlight = ({ highlight, filters = [] }) => {
     highlight.tech &&
     !highlight.tech.some((t) => filters.includes(t))
   ) {
-    return null;
+    return null
   }
 
   return (
@@ -32,9 +35,14 @@ const NonMemoRenderHighlight = ({ highlight, filters = [] }) => {
       {highlight.blurb}
       <RenderTech tech={highlight.tech} />
     </li>
-  );
-};
+  )
+}
 
-const RenderHighlight = React.memo(NonMemoRenderHighlight);
+NonMemoRenderHighlight.propTypes = {
+  highlight: PropTypes.object,
+  filters: PropTypes.array,
+}
 
-export default RenderHighlight;
+const RenderHighlight = React.memo(NonMemoRenderHighlight)
+
+export default RenderHighlight

@@ -1,18 +1,17 @@
-import React from "react";
-import cx from "classnames";
-import { Select, Button } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react"
+import { Select, Button } from "antd"
+import { useSelector, useDispatch } from "react-redux"
 
 import {
   setTechFilters,
   setSectionFilters,
   expandAll,
   collapseAll,
-} from "actions";
+} from "actions"
 
-import "./Filters.css";
+import "./Filters.css"
 
-const { Option } = Select;
+const { Option } = Select
 
 const Filters = () => {
   const {
@@ -20,13 +19,13 @@ const Filters = () => {
     section_filters,
     tech_filters,
     tech_order,
-  } = useSelector((state) => state.filters);
-  const dispatch = useDispatch();
+  } = useSelector((state) => state.filters)
+  const dispatch = useDispatch()
 
   return (
     <div className="filter-container">
       <div className="instructions">
-        You're busy. Filter down the resume to only show what you want.
+        You&apos;re busy. Filter down the resume to only show what you want.
       </div>
       <div className="filter-section">
         <div className="filter-section-label">Resume sections:</div>
@@ -73,7 +72,7 @@ const Filters = () => {
         if you want to see the old stuff from years ago.
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default React.memo(Filters);
+export default React.memo(Filters)

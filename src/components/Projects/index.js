@@ -1,11 +1,12 @@
-import React from "react";
+import React from "react"
+import PropTypes from "prop-types"
 
-import { Card, Typography, List } from "antd";
-import Tech from "components/Tech";
+import { Card, Typography, List } from "antd"
+import Tech from "components/Tech"
 
-import "./Projects.css";
+import "./Projects.css"
 
-const { Title, Text } = Typography;
+const { Title, Text } = Typography
 
 const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
   const filteredProjects = projects.filter(
@@ -13,10 +14,10 @@ const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
       !filters.length ||
       !project.tech ||
       project.tech.some((t) => filters.includes(t))
-  );
+  )
 
   if (!filteredProjects.length) {
-    return null;
+    return null
   }
   return (
     <Card size="small" title={<Title level={2}>Projects</Title>}>
@@ -29,7 +30,7 @@ const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
                 <div
                   className="project-container"
                   onClick={() => {
-                    collapseCallback(project.id);
+                    collapseCallback(project.id)
                   }}
                 >
                   <span className="project-name">
@@ -59,7 +60,14 @@ const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
         )}
       />
     </Card>
-  );
-};
+  )
+}
 
-export default React.memo(Projects);
+Projects.propTypes = {
+  projects: PropTypes.object,
+  filters: PropTypes.array,
+  collapsed: PropTypes.bool,
+  collapseCallback: PropTypes.func,
+}
+
+export default React.memo(Projects)

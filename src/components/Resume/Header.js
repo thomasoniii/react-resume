@@ -1,5 +1,6 @@
-import React from "react";
-import { PageHeader, Button } from "antd";
+import React from "react"
+import PropTypes from "prop-types"
+import { PageHeader, Button } from "antd"
 
 const Header = ({ contact }) => (
   <>
@@ -24,6 +25,8 @@ const Header = ({ contact }) => (
       </div>
     </div>
   </>
-);
+)
 
-export default React.memo(Header);
+Header.propTypes = { contact: PropTypes.object }
+
+export default React.memo(Header)

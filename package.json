@@ -5,7 +5,7 @@
   "private": true,
   "devDependencies": {
     "gh-pages": "^2.2.0",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^4.0.3",
     "react-test-renderer": "^16.14.0"
   },
   "dependencies": {

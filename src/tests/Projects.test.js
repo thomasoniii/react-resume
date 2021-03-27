@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import renderer from 'react-test-renderer';
+import React from "react"
+import ReactDOM from "react-dom"
+import renderer from "react-test-renderer"
 
-import Projects from '../components/Projects';
-import resume from '../data/resume-example.json';
+import Projects from "../components/Projects"
+import resume from "../data/resume-example.json"
 
 /*
 <Projects
@@ -14,12 +14,12 @@ import resume from '../data/resume-example.json';
   key='projects'/>,
 */
 
-const filters = {};
-const collapsed = {};
-const collapsedCallback = () => {};
+const filters = {}
+const collapsed = {}
+const collapsedCallback = () => {}
 
-describe('Other Projects tests', () => {
-  test('Projects exists properly', () => {
+describe("Other Projects tests", () => {
+  test("Projects exists properly", () => {
     const projects = renderer.create(
       <Projects
         filters={filters}
@@ -27,9 +27,9 @@ describe('Other Projects tests', () => {
         collapsed={collapsed}
         collapsedCallback={collapsedCallback}
       />
-    );
+    )
 
-    let tree = projects.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-});
+    const tree = projects.toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+})

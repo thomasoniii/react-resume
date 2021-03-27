@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import renderer from 'react-test-renderer';
+import React from "react"
+import ReactDOM from "react-dom"
+import renderer from "react-test-renderer"
 
-import Experience from '../components/Experience';
-import resume from '../data/resume-example.json';
+import Experience from "../components/Experience"
+import resume from "../data/resume-example.json"
 
 /*
 <Experience
@@ -16,25 +16,25 @@ import resume from '../data/resume-example.json';
   key='experience'/>
 */
 
-const filters = {};
-const collapsed = {};
-const collapsedCallback = () => {};
-const sections = {};
+const filters = {}
+const collapsed = {}
+const collapsedCallback = () => {}
+const sections = {}
 
-describe('Experience tests', () => {
-  test('Experience exists properly', () => {
+describe("Experience tests", () => {
+  test("Experience exists properly", () => {
     const experience = renderer.create(
       <Experience
-        filters={ filters }
+        filters={filters}
         experience={resume.experience}
         projects={resume.projects}
         sections={sections}
         collapsed={collapsed}
         collapseCallback={collapsedCallback}
-        />
-    );
+      />
+    )
 
-    let tree = experience.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-});
+    const tree = experience.toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+})
