@@ -35,6 +35,17 @@ const fetchResume = fetch("./resume.json").then((res) => res.json());
 
 const suspendedFetchResume = suspend(fetchResume);
 
+function getGridColumns(section_filters) {
+  if (
+    section_filters.includes(EXPERIENCE) &&
+    section_filters.includes(SKILLS)
+  ) {
+    return "3fr 1fr";
+  } else {
+    return "1fr";
+  }
+}
+
 const NonMemoResume = () => {
   const resume = suspendedFetchResume();
 
@@ -126,7 +137,24 @@ const NonMemoResume = () => {
     <Header key="header" contact={resume.contact} />,
 
     <Filters key="tech_filters" />,
-    ...sections,
+    //...sections,
+    section_filters.includes(SUMMARY) && section_mapping[SUMMARY],
+    (section_filters.includes(EXPERIENCE) ||
+      section_filters.includes(SKILLS)) && (
+      <div
+        className="resume-container"
+        style={{ "grid-template-columns": getGridColumns(section_filters) }}
+      >
+        <div className="left-column">
+          {section_filters.includes(EXPERIENCE) && section_mapping[EXPERIENCE]}
+        </div>
+        <div className="right-column">
+          {section_filters.includes(SKILLS) && section_mapping[SKILLS]}
+        </div>
+      </div>
+    ),
+    section_filters.includes(OTHER_PROJECTS) && section_mapping[OTHER_PROJECTS],
+    section_filters.includes(EDUCATION) && section_mapping[EDUCATION],
   ];
 };
 
