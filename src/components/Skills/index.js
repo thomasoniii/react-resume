@@ -31,6 +31,7 @@ const NonMemoRenderSkillSet = ({ set, filters = [] }) => {
     );
     return (
       <List
+        key={cat.type}
         header={<Title level={4}>{cat.type}</Title>}
         dataSource={filteredItems}
         renderItem={(skill) => (

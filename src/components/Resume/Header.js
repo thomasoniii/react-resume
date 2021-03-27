@@ -16,11 +16,11 @@ const Header = ({ contact }) => (
         </Button>,
       ]}
     />
-    <div className="container-fluid print-header" key="print-header">
-      <div className="row">
-        <div className="col print-name">{contact.name}</div>
-        <div className="col print-phone">{contact.phone}</div>
-        <div className="col print-email">{contact.email}</div>
+    <div className="print-header">
+      <div>
+        <div className="print-name">{contact.name}</div>
+        <div className="print-phone">{contact.phone}</div>
+        <div className="print-email">{contact.email}</div>
       </div>
     </div>
   </>

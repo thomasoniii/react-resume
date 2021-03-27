@@ -1,5 +1,7 @@
 import React from "react";
 
+import Tech from "components/Tech";
+
 import "./Experience.css";
 
 const NonMemoRenderTech = ({ tech = [] }) => {
@@ -9,22 +11,20 @@ const NonMemoRenderTech = ({ tech = [] }) => {
 
   return (
     <div className="project-tech-box">
-      <span className="subsubheading">Technology used:</span>
-      <span className="project-tech">{tech.join(", ")}</span>
+      <Tech tech={tech} />
     </div>
   );
 };
 
 const RenderTech = React.memo(NonMemoRenderTech);
 
-const NonMemoRenderHighlight = ({ highlight, filters }) => {
-  if (Object.keys(filters).length && highlight.tech) {
-    let shouldDisplay = highlight.tech.reduce((sd, f) => {
-      return sd || filters[f];
-    }, false);
-    if (!shouldDisplay) {
-      return null;
-    }
+const NonMemoRenderHighlight = ({ highlight, filters = [] }) => {
+  if (
+    filters.length &&
+    highlight.tech &&
+    !highlight.tech.some((t) => filters.includes(t))
+  ) {
+    return null;
   }
 
   return (

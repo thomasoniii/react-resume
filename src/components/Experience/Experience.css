@@ -1,3 +1,22 @@
+.job-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.job-container:hover {
+  background-color: lightgray;
+}
+
+.results {
+  font-style: italic;
+}
+
+.tech {
+  font-style: italic;
+  color: gray;
+}
+
 .duration {
   font-style: italic;
 }
