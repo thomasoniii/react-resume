@@ -3,7 +3,15 @@
     "name": "YOUR NAME HERE",
     "blurb": "Solver of your problems",
     "email": "YOU@YOUREMAILADDRESS",
-    "phone": "800-I-WORK-4U"
+    "phone": "800-I-WORK-4U",
+    "urls": [
+      {
+        "url": "https://github.com/thomasoniii",
+        "label": "github",
+        "icon": "GithubOutlined"
+      },
+      { "url": "https://jimsresume.com", "label": "jimsresume.com" }
+    ]
   },
 
   "tech": ["Tech I know", "Other Tech I know", "More Tech I Know"],
