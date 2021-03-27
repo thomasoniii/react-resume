@@ -58,7 +58,7 @@ const Experience = ({
               !collapsed[job.id] &&
               job.projects.map((project) => (
                 <JobProject
-                  key={project.id}
+                  key={project.project}
                   project={project}
                   collapsed={collapsed}
                   sections={sections}
@@ -75,11 +75,11 @@ const Experience = ({
 }
 
 Experience.propTypes = {
-  experience: PropTypes.object,
+  experience: PropTypes.array,
   tech_filters: PropTypes.array,
-  sections: PropTypes.object,
+  sections: PropTypes.array,
   projects: PropTypes.object,
-  collapsed: PropTypes.bool,
+  collapsed: PropTypes.object,
   collapseCallback: PropTypes.func,
 }
 

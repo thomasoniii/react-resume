@@ -13,6 +13,6 @@ const Tech = ({ tech = [] }) => {
   )
 }
 
-Tech.propTypes = { tech: PropTypes.object }
+Tech.propTypes = { tech: PropTypes.array }
 
 export default React.memo(Tech)

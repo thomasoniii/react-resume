@@ -96,7 +96,7 @@ const JobProject = ({
 JobProject.propTypes = {
   project: PropTypes.object,
   collapseCallback: PropTypes.func,
-  collapsed: PropTypes.bool,
+  collapsed: PropTypes.object,
   sections: PropTypes.array,
   projects: PropTypes.object,
   filters: PropTypes.array,

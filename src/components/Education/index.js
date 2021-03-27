@@ -33,7 +33,7 @@ const Education = ({ schools }) => (
 )
 
 Education.propTypes = {
-  schools: PropTypes.object,
+  schools: PropTypes.array,
 }
 
 export default React.memo(Education)

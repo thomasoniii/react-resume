@@ -64,9 +64,9 @@ const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
 }
 
 Projects.propTypes = {
-  projects: PropTypes.object,
+  projects: PropTypes.array,
   filters: PropTypes.array,
-  collapsed: PropTypes.bool,
+  collapsed: PropTypes.object,
   collapseCallback: PropTypes.func,
 }
 

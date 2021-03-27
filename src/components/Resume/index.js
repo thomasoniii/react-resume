@@ -140,6 +140,7 @@ const NonMemoResume = () => {
     (section_filters.includes(EXPERIENCE) ||
       section_filters.includes(SKILLS)) && (
       <div
+        key="resume-container"
         className="resume-container"
         style={{ gridTemplateColumns: getGridColumns(section_filters) }}
       >

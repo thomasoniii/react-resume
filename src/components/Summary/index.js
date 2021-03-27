@@ -11,6 +11,6 @@ const Summary = ({ summary }) => (
   </Card>
 )
 
-Summary.propTypes = { summary: PropTypes.object }
+Summary.propTypes = { summary: PropTypes.array }
 
 export default React.memo(Summary)
