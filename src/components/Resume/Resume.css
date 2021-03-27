@@ -1,3 +1,14 @@
+.resume-page-header {
+  background-color: #343a40;
+}
+
+.resume-page-header .ant-page-header-heading-title {
+  color: white;
+}
+.resume-page-header .ant-page-header-heading-sub-title {
+  color: lightgray;
+}
+
 .section {
   border-top: 1px solid black;
   margin-bottom: 2vh;

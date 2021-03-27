@@ -134,7 +134,16 @@ const Resume = React.memo(NonMemoResume);
 
 const NonMemoResumeRetriever = () => {
   return (
-    <Suspense fallback={<Skeleton active />}>
+    <Suspense
+      fallback={
+        <div>
+          <Skeleton active />
+          <Skeleton active />
+          <Skeleton active />
+          <Skeleton active />
+        </div>
+      }
+    >
       <Resume />
     </Suspense>
   );
