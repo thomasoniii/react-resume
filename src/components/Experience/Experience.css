@@ -1,10 +1,12 @@
-.job-container {
+.job-container,
+.job-project-container {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.job-container:hover {
+.job-container:hover,
+.job-project-container:hover {
   background-color: lightgray;
 }
 

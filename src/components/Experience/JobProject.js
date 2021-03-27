@@ -22,10 +22,15 @@ const JobProject = ({
           collapseCallback(project_name)
         }}
       >
-        <div>
-          <span className="job-project-name">{project_name}</span>
-          <span className="project-role">{project.role}</span>
-          <span className="project-members">{project.members} person team</span>
+        <div className="job-project-container">
+          <span>
+            <span className="job-project-name">{project_name}</span>
+            <span className="project-role">{project.role}</span>
+
+            <span className="project-members">
+              {project.members} person team
+            </span>
+          </span>
           {project.url && (
             <span className="float-right">
               {project.url.map((url) => (
@@ -41,9 +46,10 @@ const JobProject = ({
               ))}
             </span>
           )}
-        </div>
-        <div className="date">
-          <div className="float-right">{project.date}</div>
+
+          <div className="date">
+            <div className="float-right">{project.date}</div>
+          </div>
         </div>
       </div>
       {projects[project_name] && sections[PROJECT_BLURBS] && (
