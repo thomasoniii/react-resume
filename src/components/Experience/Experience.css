@@ -1,13 +1,17 @@
 .job-container,
 .job-project-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   cursor: pointer;
 }
 
 .job-container:hover,
 .job-project-container:hover {
   background-color: lightgray;
+}
+
+.job-link {
+  margin-left: 1rem;
 }
 
 .highlight ul {

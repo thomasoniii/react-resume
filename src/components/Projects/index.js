@@ -33,20 +33,23 @@ const Projects = ({ projects, filters, collapsed, collapseCallback }) => {
                     collapseCallback(project.id)
                   }}
                 >
-                  <span className="project-name">
-                    <Text strong>{project.name}</Text>
+                  <span>
+                    <span className="project-name">
+                      <Text strong>{project.name}</Text>
+                    </span>
+                    {project.url && (
+                      <a
+                        href={project.url}
+                        onClick={(e) => e.stopPropagation()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        {project.url}
+                      </a>
+                    )}
                   </span>
-                  {project.url && (
-                    <a
-                      href={project.url}
-                      onClick={(e) => e.stopPropagation()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {project.url}
-                    </a>
-                  )}
-                  <span className="date">{project.date}</span>
+                  <span className="date align-right">{project.date}</span>
                 </div>
               }
               description={

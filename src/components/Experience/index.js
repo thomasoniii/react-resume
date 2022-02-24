@@ -30,21 +30,24 @@ const Experience = ({
                 collapseCallback(job.id)
               }}
             >
-              <span className="job-name">
-                <span className="employer">{job.employer}</span>
-                <span className="location">, {job.location}</span>
+              <span>
+                <span className="job-name">
+                  <span className="employer">{job.employer}</span>
+                  <span className="location">, {job.location}</span>
+                </span>
+                {job.url && (
+                  <a
+                    href={job.url}
+                    onClick={(e) => e.stopPropagation()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="job-link"
+                  >
+                    {job.url}
+                  </a>
+                )}
               </span>
-              {job.url && (
-                <a
-                  href={job.url}
-                  onClick={(e) => e.stopPropagation()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {job.url}
-                </a>
-              )}
-              <span className="duration">
+              <span className="duration align-right">
                 {job.duration.from} - {job.duration.to}
               </span>
             </div>

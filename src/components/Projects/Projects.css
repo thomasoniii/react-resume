@@ -1,6 +1,6 @@
 .project-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   cursor: pointer;
 }
 
@@ -15,4 +15,8 @@
 .tech {
   font-style: italic;
   color: gray;
+}
+
+.project-link {
+  margin-left: 1rem;
 }

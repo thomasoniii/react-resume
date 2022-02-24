@@ -47,7 +47,7 @@ const JobProject = ({
             </span>
           )}
 
-          <div className="date">
+          <div className="date align-right">
             <div className="float-right">{project.date}</div>
           </div>
         </div>

@@ -43,6 +43,10 @@
   //grid-template-columns: 3fr 1fr;
 }
 
+.align-right {
+  text-align: end;
+}
+
 @media print {
   .resume-page-header {
     display: none;
